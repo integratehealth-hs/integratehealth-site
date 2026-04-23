@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing – Integrate Health</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&family=Petrona:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --text: #333333; --muted: #666666;
+      --grad: linear-gradient(90deg, #5DBED8 0%, #0057B8 100%);
+      --grad-v: linear-gradient(180deg, #5DBED8 0%, #0057B8 100%);
+      --font-main: 'Karla', sans-serif; --font-serif: 'Petrona', serif;
+    }
+    html { font-family: var(--font-main); font-size: 16px; color: var(--text); }
+    body { background: #fff; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; }
+
+    /* HEADER */
+    header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 90vw; margin: 0 auto; padding: 4px 24px; }
+    .logo img { height: 90px; }
+    nav.desktop { display: flex; align-items: center; gap: 32px; }
+    nav.desktop a { color: #6b7280; font-size: 15px; transition: color .2s; }
+    nav.desktop a:hover, nav.desktop a.active { color: #111; }
+    .btn-login { padding: 8px 24px; border-radius: 6px; font-size: 15px; font-family: var(--font-main); font-weight: 300; background: linear-gradient(white, white) padding-box, var(--grad) border-box; border: 2px solid transparent; cursor: pointer; }
+    .btn-login span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .btn-cta { padding: 8px 24px; border-radius: 6px; font-size: 15px; font-family: var(--font-main); font-weight: 300; background: var(--grad); color: #fff; border: none; cursor: pointer; transition: opacity .2s; }
+    .btn-cta:hover { opacity: 0.88; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .mobile-drawer { display: none; position: fixed; top: 0; right: 0; width: 260px; height: 100vh; background: #fff; box-shadow: -4px 0 24px rgba(0,0,0,.12); z-index: 200; padding: 24px; flex-direction: column; gap: 24px; transform: translateX(100%); transition: transform .35s cubic-bezier(.25,.8,.25,1); }
+    .mobile-drawer.open { transform: translateX(0); }
+    .drawer-close { align-self: flex-end; background: none; border: none; cursor: pointer; }
+    .mobile-overlay { display: none; position: fixed; inset: 0; z-index: 190; }
+    .mobile-overlay.open { display: block; }
+    .mobile-drawer nav { display: flex; flex-direction: column; gap: 20px; }
+    .mobile-drawer nav a { color: #6b7280; font-size: 16px; }
+
+    /* PAGE */
+    main { padding: 64px 24px 80px; }
+    .main-inner { max-width: 1100px; margin: 0 auto; }
+
+    /* Header */
+    .pricing-header { text-align: center; margin-bottom: 64px; }
+    .pricing-header h1 { font-size: clamp(28px, 4vw, 48px); color: var(--text); font-weight: 500; margin-bottom: 12px; }
+    .grad-text { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .italic-serif { font-family: var(--font-serif); font-style: italic; }
+    .pricing-header p { font-family: var(--font-serif); font-style: italic; font-size: clamp(16px, 1.8vw, 22px); background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* CARDS */
+    .pricing-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 820px; margin: 0 auto 96px; align-items: start; }
+    .pricing-card {
+      border-radius: 20px; padding: 40px 36px; position: relative;
+      transition: box-shadow .3s;
+    }
+    .pricing-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,.12); }
+    .pricing-card.featured {
+      background: linear-gradient(white, white) padding-box, var(--grad-v) border-box;
+      border: 2px solid transparent;
+      transform: scale(1.04);
+    }
+    .pricing-card.coming-soon { border: 1px solid #e5e5e5; opacity: .6; }
+    .badge {
+      position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+      padding: 4px 18px; border-radius: 999px; font-size: 13px;
+      color: #fff; white-space: nowrap;
+    }
+    .badge.popular { background: var(--grad); }
+    .badge.soon { background: #999; }
+    .card-name { text-align: center; font-size: 22px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+    .card-desc { text-align: center; font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+    .price-block { text-align: center; margin-bottom: 28px; }
+    .founder-label { font-family: var(--font-serif); font-style: italic; font-size: 13px; color: #0057B8; margin-bottom: 8px; }
+    .price-row { display: flex; align-items: baseline; justify-content: center; gap: 10px; }
+    .price-strike { font-size: 18px; color: #999; text-decoration: line-through; }
+    .price-main { font-size: 52px; color: var(--text); font-weight: 500; line-height: 1; }
+    .price-period { font-size: 13px; color: var(--muted); margin-top: 8px; }
+    .btn-card {
+      width: 100%; padding: 14px 24px; border-radius: 8px; border: none;
+      font-family: var(--font-main); font-size: 15px; font-weight: 500;
+      cursor: pointer; transition: opacity .2s, transform .2s; margin-bottom: 24px;
+    }
+    .btn-card.primary { background: var(--grad); color: #fff; }
+    .btn-card.primary:hover { opacity: .88; transform: scale(1.02); }
+    .btn-card.disabled { background: #ccc; color: #fff; cursor: not-allowed; }
+    .feature-list { display: flex; flex-direction: column; gap: 12px; }
+    .feature-row { display: flex; align-items: flex-start; gap: 10px; }
+    .check { flex-shrink: 0; margin-top: 2px; }
+    .feature-row span { font-size: 15px; color: var(--text); line-height: 1.5; }
+
+    /* COMPARISON TABLE */
+    .compare-section { margin-top: 0; }
+    .compare-header { text-align: center; margin-bottom: 48px; }
+    .compare-header h2 { font-size: clamp(24px, 3vw, 36px); color: var(--text); font-weight: 500; margin-bottom: 10px; }
+    .compare-header p { font-family: var(--font-serif); font-style: italic; font-size: 18px; color: var(--muted); }
+    .compare-table { border-radius: 16px; overflow: hidden; border: 1px solid #e5e5e5; width: 100%; border-collapse: collapse; }
+    .compare-table thead tr { background: var(--grad); }
+    .compare-table th { padding: 18px 24px; color: #fff; font-size: 15px; font-weight: 500; text-align: left; }
+    .compare-table th:not(:first-child) { text-align: center; }
+    .compare-table th.dim { opacity: .65; }
+    .compare-table td { padding: 16px 24px; font-size: 15px; color: var(--text); border-bottom: 1px solid #e5e5e5; }
+    .compare-table td:not(:first-child) { text-align: center; }
+    .compare-table tbody tr:nth-child(even) td { background: #f9f9f9; }
+    .compare-table tbody tr:last-child td { border-bottom: none; }
+
+    /* HELP */
+    .help-section { margin-top: 64px; text-align: center; }
+    .btn-help {
+      display: inline-flex; align-items: center; padding: 18px 32px; border-radius: 10px;
+      background: var(--grad); color: #fff; border: none; font-family: var(--font-main);
+      font-size: 16px; font-weight: 500; cursor: pointer; transition: opacity .2s, box-shadow .2s;
+      line-height: 1.5;
+    }
+    .btn-help:hover { opacity: .88; box-shadow: 0 8px 24px rgba(0,87,184,.25); }
+
+    /* FOOTER */
+    footer { background: var(--text); color: #fff; padding: 24px 32px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .footer-inner img { height: 110px; filter: brightness(0) invert(1); }
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+    .btn-contact { padding: 12px 32px; border: 2px solid #fff; border-radius: 6px; color: #fff; background: var(--text); font-family: var(--font-main); font-size: 14px; font-weight: 300; letter-spacing: .08em; cursor: pointer; transition: opacity .2s; }
+    .btn-contact:hover { opacity: .8; }
+    .footer-copy { font-size: 13px; text-align: right; color: rgba(255,255,255,.75); }
+    .footer-copy a { color: rgba(255,255,255,.75); }
+
+    @media (max-width: 900px) {
+      nav.desktop, .header-inner .btn-login, .header-inner .btn-cta { display: none; }
+      .hamburger { display: block; }
+      .mobile-drawer { display: flex; }
+      .pricing-cards { grid-template-columns: 1fr; max-width: 420px; }
+      .pricing-card.featured { transform: scale(1); }
+      .compare-table th, .compare-table td { padding: 12px 14px; font-size: 13px; }
+      .footer-inner { flex-direction: column; align-items: center; gap: 12px; }
+      .footer-right { align-items: center; }
+      .footer-copy { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Integrate Health" /></a>
+    <nav class="desktop">
+      <a href="solutions.html">solutions</a>
+      <a href="pricing.html" class="active">pricing</a>
+      <a href="https://app.integratehealth.ai" target="_blank" class="btn-login"><span>log in</span></a>
+      <a href="get-started.html"><button class="btn-cta">get started</button></a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  </div>
+</header>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+  <button class="drawer-close" id="drawerClose"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <nav>
+    <a href="solutions.html">solutions</a>
+    <a href="pricing.html">pricing</a>
+    <a href="https://app.integratehealth.ai" target="_blank">log in</a>
+    <a href="get-started.html"><button class="btn-cta" style="width:100%">get started</button></a>
+  </nav>
+</div>
+
+<main>
+  <div class="main-inner">
+    <div class="pricing-header">
+      <h1>choose your plan</h1>
+      <p>pricing that scales with your practice</p>
+    </div>
+
+    <div class="pricing-cards">
+      <!-- Core -->
+      <div class="pricing-card featured">
+        <div class="badge popular">Most Popular</div>
+        <p class="card-name">Core</p>
+        <p class="card-desc">&nbsp;</p>
+        <div class="price-block">
+          <div class="price-row">
+            <span class="price-main" style="font-weight:200;margin:-30px 0px 0px">$189</span>
+          </div>
+          <p class="price-period">per user/month</p>
+        </div>
+        <a href="get-started.html"><button class="btn-card primary">Get Started</button></a>
+        <div class="feature-list">
+          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Capture full patient visits automatically</span></div>
+          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Auto-generated SOAP notes</span></div>
+          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Handles 30+ minute, in-depth visits</span></div>
+          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Sync notes to your EHR in one click</span></div>
+        </div>
+      </div>
+
+      <!-- Clinical -->
+      <div class="pricing-card coming-soon">
+        <div class="badge soon">Coming Soon</div>
+        <p class="card-name">Clinical</p>
+        <p class="card-desc">For growing practices</p>
+        <div class="price-block">
+          <div class="price-row"><span class="price-main">—</span></div>
+        </div>
+        <button class="btn-card disabled" disabled>Coming Soon</button>
+        <div class="feature-list">
+          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Everything in Core</span></div>
+          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Customization for SOAP notes that reflect your clinical thinking</span></div>
+          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Multi-provider support</span></div>
+          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Custom documentation styles</span></div>
+          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Priority processing and faster turnaround</span></div>
+          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dedicated account specialist</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="compare-section">
+      <div class="compare-header">
+        <h2>compare plans</h2>
+        <p>see what's included in each tier</p>
+      </div>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Features</th>
+            <th>Core</th>
+            <th class="dim">Clinical (Coming Soon)</th>
+          </tr>
+        </thead>
+        <tbody id="compareBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Help -->
+    <div class="help-section">
+      <a href="get-started.html">
+        <button class="btn-help">
+          Need help deciding what plan is best for you?&nbsp;
+          <span style="font-family:var(--font-serif);font-style:italic">Set up a time with one of our sales specialists</span>
+        </button>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html"><img src="assets/logo.png" alt="Integrate Health" /></a>
+    <div class="footer-right">
+      <a href="get-started.html"><button class="btn-contact">CONTACT US</button></a>
+      <div class="footer-copy">
+        <p>Copyright 2026 Integrate Health, LLC</p>
+        <a href="privacy-policy.html">privacy policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  const hamburger = document.getElementById('hamburgerBtn');
+  const overlay   = document.getElementById('mobileOverlay');
+  const drawer    = document.getElementById('mobileDrawer');
+  const closeBtn  = document.getElementById('drawerClose');
+  hamburger.addEventListener('click', () => { drawer.classList.add('open'); overlay.classList.add('open'); });
+  closeBtn.addEventListener('click', () => { drawer.classList.remove('open'); overlay.classList.remove('open'); });
+  overlay.addEventListener('click', () => { drawer.classList.remove('open'); overlay.classList.remove('open'); });
+
+  // Comparison table
+  const features = [
+    { name: 'Capture full patient visits automatically',              core: true,  clinical: true  },
+    { name: 'Auto-generated SOAP notes',                             core: true,  clinical: true  },
+    { name: 'Handles 30+ minute, in-depth visits',                   core: true,  clinical: true  },
+    { name: 'Sync notes to your EHR in one click',                   core: true,  clinical: true  },
+    { name: 'Customization for SOAP notes',                          core: false, clinical: true  },
+    { name: 'Multi-provider support',                                core: false, clinical: true  },
+    { name: 'Custom documentation styles',                           core: false, clinical: true  },
+    { name: 'Priority processing',                                   core: false, clinical: true  },
+    { name: 'Dedicated account specialist',                          core: false, clinical: true  },
+  ];
+  const checkSvg = (color) => `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="${color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  const crossSvg = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><line x1="5" y1="5" x2="15" y2="15" stroke="#ccc" stroke-width="2" stroke-linecap="round"/><line x1="15" y1="5" x2="5" y2="15" stroke="#ccc" stroke-width="2" stroke-linecap="round"/></svg>`;
+  const tbody = document.getElementById('compareBody');
+  features.forEach(f => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${f.name}</td><td>${f.core ? checkSvg('#5DBED8') : crossSvg}</td><td style="opacity:.55">${f.clinical ? checkSvg('#0057B8') : crossSvg}</td>`;
+    tbody.appendChild(tr);
+  });
+</script>
+</body>
+</html>

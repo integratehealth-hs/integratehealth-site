@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solutions – Integrate Health</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&family=Petrona:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue-light: #5DBED8; --blue-dark: #0057B8; --text: #333333;
+      --muted: #666666; --grad: linear-gradient(90deg, #5DBED8 0%, #0057B8 100%);
+      --font-main: 'Karla', sans-serif; --font-serif: 'Petrona', serif;
+    }
+    html { font-family: var(--font-main); font-size: 16px; color: var(--text); }
+    body { background: #fff; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; }
+
+    /* HEADER */
+    header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 90vw; margin: 0 auto; padding: 4px 24px; }
+    .logo img { height: 90px; }
+    nav.desktop { display: flex; align-items: center; gap: 32px; }
+    nav.desktop a { color: #6b7280; font-size: 15px; transition: color .2s; }
+    nav.desktop a:hover, nav.desktop a.active { color: #111; }
+    .btn-login { padding: 8px 24px; border-radius: 6px; font-size: 15px; font-family: var(--font-main); font-weight: 300; background: linear-gradient(white, white) padding-box, var(--grad) border-box; border: 2px solid transparent; cursor: pointer; }
+    .btn-login span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .btn-cta { padding: 8px 24px; border-radius: 6px; font-size: 15px; font-family: var(--font-main); font-weight: 300; background: var(--grad); color: #fff; border: none; cursor: pointer; transition: opacity .2s; }
+    .btn-cta:hover { opacity: 0.88; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .mobile-drawer { display: none; position: fixed; top: 0; right: 0; width: 260px; height: 100vh; background: #fff; box-shadow: -4px 0 24px rgba(0,0,0,.12); z-index: 200; padding: 24px; flex-direction: column; gap: 24px; transform: translateX(100%); transition: transform .35s cubic-bezier(.25,.8,.25,1); }
+    .mobile-drawer.open { transform: translateX(0); }
+    .drawer-close { align-self: flex-end; background: none; border: none; cursor: pointer; }
+    .mobile-overlay { display: none; position: fixed; inset: 0; z-index: 190; }
+    .mobile-overlay.open { display: block; }
+    .mobile-drawer nav { display: flex; flex-direction: column; gap: 20px; }
+    .mobile-drawer nav a { color: #6b7280; font-size: 16px; }
+
+    /* HERO */
+    .page-hero { padding: 80px 24px; background: #fff; text-align: center; }
+    .page-hero h1 { font-size: clamp(36px, 5vw, 56px); color: var(--text); line-height: 1.1; margin-bottom: 24px; font-weight: 500; }
+    .grad-text { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .italic-serif { font-family: var(--font-serif); font-style: italic; }
+    .page-hero p { font-size: clamp(16px, 1.5vw, 20px); color: var(--text); max-width: 700px; margin: 0 auto; line-height: 1.65; }
+
+    /* SOLUTION CARDS */
+    .solutions-section { padding: 16px 24px 80px; }
+    .solutions-inner { max-width: 90vw; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+    .solution-card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 48px; box-shadow: 0 4px 24px rgba(0,0,0,.06); transition: box-shadow .3s; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .solution-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.12); }
+    .solution-card h2 { font-size: clamp(22px, 2.5vw, 30px); color: var(--text); margin-bottom: 16px; font-weight: 500; }
+    .solution-card p { font-size: 17px; color: var(--text); line-height: 1.65; }
+    .features { display: flex; flex-direction: column; gap: 14px; }
+    .feature-item { display: flex; align-items: flex-start; gap: 12px; }
+    .check-dot { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, #5DBED8, #0057B8); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .check-dot svg { width: 14px; height: 14px; }
+    .feature-item span { font-size: 17px; color: var(--text); line-height: 1.5; }
+
+    /* WORKFLOW */
+    .workflow-section { padding: 80px 24px; background: #f9f9f9; }
+    .workflow-inner { max-width: 90vw; margin: 0 auto; text-align: center; }
+    .workflow-inner h2 { font-size: clamp(28px, 3vw, 40px); color: var(--text); margin-bottom: 16px; font-weight: 500; }
+    .workflow-inner > p { font-size: 18px; color: var(--text); max-width: 700px; margin: 0 auto 56px; line-height: 1.65; }
+    .workflow-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .workflow-step { padding: 24px; }
+    .workflow-num { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #5DBED8, #0057B8); color: #fff; font-size: 24px; font-weight: 500; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .workflow-step h3 { font-size: 20px; color: var(--text); margin-bottom: 10px; font-weight: 500; }
+    .workflow-step p { color: var(--text); line-height: 1.6; }
+
+    /* CTA */
+    .cta-section { padding: 80px 24px; background: #fff; text-align: center; }
+    .cta-section h2 { font-size: clamp(28px, 3vw, 40px); color: var(--text); margin-bottom: 16px; font-weight: 500; }
+    .cta-section p { font-size: 18px; color: var(--text); margin-bottom: 32px; }
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 16px 48px; border-radius: 8px; background: var(--grad); color: #fff; font-family: var(--font-main); font-size: 16px; font-weight: 500; border: none; cursor: pointer; transition: opacity .2s, transform .2s; }
+    .btn-primary:hover { opacity: .88; transform: scale(1.03); }
+
+    /* FOOTER */
+    footer { background: var(--text); color: #fff; padding: 24px 32px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .footer-inner img { height: 110px; filter: brightness(0) invert(1); }
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+    .btn-contact { padding: 12px 32px; border: 2px solid #fff; border-radius: 6px; color: #fff; background: var(--text); font-family: var(--font-main); font-size: 14px; font-weight: 300; letter-spacing: .08em; cursor: pointer; transition: opacity .2s; }
+    .btn-contact:hover { opacity: .8; }
+    .footer-copy { font-size: 13px; text-align: right; color: rgba(255,255,255,.75); }
+    .footer-copy a { color: rgba(255,255,255,.75); }
+
+    @media (max-width: 900px) {
+      nav.desktop, .header-inner .btn-login, .header-inner .btn-cta { display: none; }
+      .hamburger { display: block; }
+      .mobile-drawer { display: flex; }
+      .solution-card { grid-template-columns: 1fr; gap: 24px; padding: 28px; }
+      .workflow-steps { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: center; gap: 12px; }
+      .footer-right { align-items: center; }
+      .footer-copy { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Integrate Health" /></a>
+    <nav class="desktop">
+      <a href="solutions.html" class="active">solutions</a>
+      <a href="pricing.html">pricing</a>
+      <a href="https://app.integratehealth.ai" target="_blank" rel="noopener" class="btn-login"><span>log in</span></a>
+      <a href="get-started.html"><button class="btn-cta">get started</button></a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+  <button class="drawer-close" id="drawerClose"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <nav>
+    <a href="solutions.html">solutions</a>
+    <a href="pricing.html">pricing</a>
+    <a href="https://app.integratehealth.ai" target="_blank">log in</a>
+    <a href="get-started.html"><button class="btn-cta" style="width:100%">get started</button></a>
+  </nav>
+</div>
+
+<main>
+  <section class="page-hero">
+    <h1>solutions built for<br /><span class="italic-serif grad-text">functional medicine</span></h1>
+    <p>our AI-powered scribe understands the complexity of functional medicine and adapts to your unique practice needs.</p>
+  </section>
+
+  <section class="solutions-section">
+    <div class="solutions-inner">
+      <!-- Card 1 -->
+      <div class="solution-card">
+        <div>
+          <h2>comprehensive documentation</h2>
+          <p>Capture every detail of your functional medicine visits—from lifestyle factors and supplement protocols to lab interpretations and treatment plans.</p>
+        </div>
+        <div class="features">
+          <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>60+ minute visit support</span></div>
+          <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Lifestyle and dietary assessments</span></div>
+          <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Supplement and nutraceutical tracking</span></div>
+          <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Root cause analysis documentation</span></div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="solution-card">
+        <div>
+          <h2>intelligent soap notes</h2>
+          <p>Generate clinically accurate SOAP notes that reflect your unique thinking process and functional medicine approach.</p>
+        </div>
+        <div class="features">
+          <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Context-aware documentation</span></div>
+          <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Functional medicine terminology</span></div>
+          <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Customizable templates</span></div>
+          <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Shareable Patient Summary</span></div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="solution-card">
+        <div>
+          <h2>time savings</h2>
+          <p>Reduce documentation time by up to 70% so you can focus on what matters most—your patients.</p>
+        </div>
+        <div class="features">
+          <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Real-time transcription</span></div>
+          <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Automated note generation</span></div>
+          <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Quick review and editing</span></div>
+          <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Sync soap notes with one click</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="workflow-section">
+    <div class="workflow-inner">
+      <h2>Seamless Integration with Your Workflow</h2>
+      <p>Works with your existing EHR and practice management systems</p>
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="workflow-num">1</div>
+          <h3>Record Your Visit</h3>
+          <p>Our AI listens and transcribes your patient conversation in real-time</p>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-num">2</div>
+          <h3>Review &amp; Refine</h3>
+          <p>Get a complete SOAP note generated instantly, ready for your review</p>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-num">3</div>
+          <h3>Sync</h3>
+          <p>Send your finalized notes directly to your EHR with one click</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>Ready to Transform Your Practice?</h2>
+    <p>Join functional medicine providers who are saving hours each week</p>
+    <a href="get-started.html"><button class="btn-primary">GET STARTED</button></a>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html"><img src="assets/logo.png" alt="Integrate Health" /></a>
+    <div class="footer-right">
+      <a href="get-started.html"><button class="btn-contact">CONTACT US</button></a>
+      <div class="footer-copy">
+        <p>Copyright 2026 Integrate Health, LLC</p>
+        <a href="privacy-policy.html">privacy policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburgerBtn');
+  const overlay   = document.getElementById('mobileOverlay');
+  const drawer    = document.getElementById('mobileDrawer');
+  const closeBtn  = document.getElementById('drawerClose');
+  hamburger.addEventListener('click', () => { drawer.classList.add('open'); overlay.classList.add('open'); });
+  closeBtn.addEventListener('click', () => { drawer.classList.remove('open'); overlay.classList.remove('open'); });
+  overlay.addEventListener('click', () => { drawer.classList.remove('open'); overlay.classList.remove('open'); });
+</script>
+</body>
+</html>
