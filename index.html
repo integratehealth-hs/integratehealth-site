@@ -314,6 +314,7 @@
     .card p span { font-size: 14px; line-height: 1.4; }
     .card-2 p { color: #60B7D6; }
 
+    .mobile-cta-between { display: none; }
     /* ── DEMO SECTION ── */
     .demo-section { padding: 32px 24px 48px; background: #fff; }
     .demo-inner { max-width: 90vw; margin: 0 auto; }
@@ -417,9 +418,10 @@
     .step-line {
       width: 4px; flex: 1; min-height: 56px;
       background: var(--grad-v);
-      height: 0; transition: height .7s .3s;
+      transform: scaleY(0); transform-origin: top;
+      transition: transform .7s .3s;
     }
-    .step-line.visible { height: 56px; }
+    .step-line.visible { transform: scaleY(1); }
     .step-text {
       padding-top: 8px;
       font-size: clamp(15px, 1.4vw, 20px); color: var(--text); line-height: 1.5;
@@ -454,8 +456,31 @@
       .mobile-drawer { display: flex; }
 
       .time-cards { grid-template-columns: 1fr; }      .hero-grid { grid-template-columns: 1fr; gap: 24px; width: 100%; }
-      .hero-text { height: auto; padding-left: 0; padding-top: 0; }
-      .anim-wrap { transform: none; }
+      .time-section { padding: 32px 8px 48px; }
+      .time-inner { max-width: 100%; }
+      .time-card { padding: 24px 20px; }
+      .hero { padding-left: 0; padding-right: 0; overflow: hidden; }
+      .hero-text { height: auto; padding-left: 24px; padding-right: 24px; padding-top: 0; box-sizing: border-box; width: 100%; overflow: hidden; }
+      .hero-text h1 { font-size: clamp(26px, 7.8vw, 38px); word-break: break-word; }
+      .hero-sub { font-size: 15px; width: calc(100vw - 48px); max-width: calc(100vw - 48px); box-sizing: border-box; word-break: break-word; overflow-wrap: break-word; }
+      .anim-wrap { width: 160vw; margin-left: -30vw; margin-top: -24px; aspect-ratio: 16/9; height: auto; }
+      .time-headline { text-align: left; }
+      .time-headline h2 { font-size: clamp(22px, 6vw, 30px); }
+      .mobile-cta-between { display: block; padding: 4px 40px 16px; }
+      .mobile-cta-between .btn-cta {
+        width: 100% !important;
+        padding: 18px 32px !important;
+        font-size: 17px !important;
+        font-weight: 500 !important;
+        border-radius: 14px !important;
+        letter-spacing: 0.02em;
+        box-shadow: 0 8px 24px rgba(0, 87, 184, 0.35);
+        animation: cta-pulse 2.5s ease-in-out infinite;
+      }
+      @keyframes cta-pulse {
+        0%, 100% { box-shadow: 0 8px 24px rgba(0, 87, 184, 0.35); transform: scale(1); }
+        50% { box-shadow: 0 12px 36px rgba(0, 87, 184, 0.55); transform: scale(1.025); }
+      }
 
       .cards-layout { flex-direction: column; align-items: center; }
       .cards-heading { max-width: 100%; text-align: left; }
@@ -468,7 +493,9 @@
       .demo-desktop { display: none; }
       .demo-mobile { display: block !important; }
 
+      .practice-section { padding: 32px 24px 48px; }
       .practice-inner { grid-template-columns: 1fr; gap: 32px; }
+      .demo-mobile .demo-card-title { color: #333 !important; -webkit-text-fill-color: #333 !important; background: none !important; font-size: 18px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       .practice-tag-inner { margin-left: 0; }
 
       .footer-inner { flex-direction: column; align-items: center; gap: 12px; }
@@ -560,6 +587,9 @@
 </section>
 
 <!-- DEMO SECTION -->
+<a href="get-started.html" class="mobile-cta-between">
+  <button class="btn-cta" style="width:100%;">Get Started</button>
+</a>
 <section class="demo-section">
   <div class="demo-inner">
     <!-- Mobile -->
@@ -572,6 +602,9 @@
         <div class="demo-benefit"><div class="demo-benefit-dot"></div><div><strong>More patients, without longer days</strong><span>Free up space without sacrificing quality</span></div></div>
         <div class="demo-benefit"><div class="demo-benefit-dot"></div><div><strong>Increased revenue per week</strong><span>Turn saved time into additional visits</span></div></div>
       </div>
+      <a href="get-started.html" style="display:block; margin-top:20px;">
+        <button class="btn-primary" style="width:100%;">Watch a 2-minute demo</button>
+      </a>
     </div>
 
     <!-- Desktop -->
@@ -820,6 +853,97 @@
     }
   }, { threshold: 0.3 });
   stepsObserver.observe(document.getElementById('stepsContainer'));
+</script>
+
+<!-- GET STARTED MODAL -->
+<div id="gs-modal-overlay" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); align-items:center; justify-content:center; padding:24px;">
+  <div id="gs-modal" style="background:#fff; border-radius:20px; max-width:480px; width:100%; padding:36px 28px; box-shadow:0 24px 64px rgba(0,0,0,0.2); position:relative; animation:gs-in 0.3s cubic-bezier(0.34,1.56,0.64,1);">
+    <button onclick="closeGsModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;color:#aaa;font-size:22px;line-height:1;">✕</button>
+    <h2 style="font-family:'Petrona',serif;font-style:italic;font-size:26px;color:#0057B8;margin-bottom:6px;font-weight:500;">how can we help?</h2>
+    <p style="font-size:14px;color:#888;margin-bottom:28px;font-family:'Karla',sans-serif;">choose the best next step for you</p>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+
+      <a href="checkout.html" style="text-decoration:none;">
+        <div class="gs-option">
+          <div class="gs-option-icon" style="background:linear-gradient(135deg,#5DBED8,#0057B8);">✓</div>
+          <div>
+            <div class="gs-option-title">I'm ready to buy</div>
+            <div class="gs-option-sub">Start using Integrate today and begin saving time immediately.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="schedule.html" style="text-decoration:none;">
+        <div class="gs-option">
+          <div class="gs-option-icon" style="background:linear-gradient(135deg,#60C6A8,#0057B8);">💬</div>
+          <div>
+            <div class="gs-option-title">I want to speak to sales</div>
+            <div class="gs-option-sub">Have questions? Let's walk through your workflow and see if it's a fit.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="get-started.html" style="text-decoration:none;">
+        <div class="gs-option">
+          <div class="gs-option-icon" style="background:linear-gradient(135deg,#A78BFA,#0057B8);">✉</div>
+          <div>
+            <div class="gs-option-title">Email me a demo</div>
+            <div class="gs-option-sub">Get a quick overview of how Integrate works, sent straight to your inbox.</div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes gs-in {
+    from { opacity:0; transform:scale(0.92) translateY(12px); }
+    to   { opacity:1; transform:scale(1) translateY(0); }
+  }
+  .gs-option {
+    display:flex; align-items:flex-start; gap:16px;
+    padding:16px 18px; border-radius:14px; border:1.5px solid #e5e7eb;
+    cursor:pointer; transition:border-color .2s, box-shadow .2s, transform .15s;
+    font-family:'Karla',sans-serif;
+  }
+  .gs-option:hover {
+    border-color:#5DBED8;
+    box-shadow:0 4px 16px rgba(93,190,216,0.2);
+    transform:translateY(-2px);
+  }
+  .gs-option-icon {
+    width:40px; height:40px; border-radius:10px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:16px;
+  }
+  .gs-option-title { font-size:15px; font-weight:600; color:#1a1a1a; margin-bottom:3px; }
+  .gs-option-sub { font-size:13px; color:#666; line-height:1.5; }
+  #gs-modal-overlay.open { display:flex !important; }
+</style>
+
+<script>
+  function openGsModal() {
+    const overlay = document.getElementById('gs-modal-overlay');
+    overlay.style.display = 'flex';
+    requestAnimationFrame(() => overlay.classList.add('open'));
+  }
+  function closeGsModal() {
+    document.getElementById('gs-modal-overlay').style.display = 'none';
+  }
+  document.getElementById('gs-modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeGsModal();
+  });
+
+  // Intercept all get-started.html links (except ones inside the modal)
+  document.querySelectorAll('a[href="get-started.html"]').forEach(a => {
+    if (a.closest('#gs-modal-overlay')) return;
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      openGsModal();
+    });
+  });
 </script>
 </body>
 </html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Talk to Sales – Integrate Health</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&family=Petrona:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --text: #333333; --muted: #666666;
+      --grad: linear-gradient(90deg, #5DBED8 0%, #0057B8 100%);
+      --font-main: 'Karla', sans-serif; --font-serif: 'Petrona', serif;
+    }
+    html { font-family: var(--font-main); font-size: 16px; color: var(--text); }
+    body { background: #f7f9fc; min-height: 100vh; display: flex; flex-direction: column; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; }
+
+    /* HEADER */
+    header { background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 90vw; margin: 0 auto; padding: 4px 24px; }
+    .logo img { height: 80px; }
+
+    /* MAIN */
+    main { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 48px 24px; gap: 40px; flex-wrap: wrap; }
+
+    /* LEFT PANEL */
+    .left-panel { max-width: 340px; width: 100%; padding-top: 8px; }
+    .left-panel h1 { font-size: 32px; font-weight: 300; line-height: 1.25; margin-bottom: 12px; }
+    .left-panel .tagline { font-family: var(--font-serif); font-style: italic; font-size: 17px; color: var(--muted); margin-bottom: 32px; line-height: 1.6; }
+    .what-to-expect { display: flex; flex-direction: column; gap: 20px; }
+    .expect-item { display: flex; gap: 16px; align-items: flex-start; }
+    .expect-num {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      background: var(--grad); color: #fff; font-size: 13px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .expect-item strong { font-size: 15px; display: block; margin-bottom: 3px; }
+    .expect-item p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* FORM PANEL */
+    .form-panel { background: #fff; border-radius: 16px; border: 1.5px solid #e5e7eb; padding: 36px; width: 100%; max-width: 500px; }
+    .form-panel h2 { font-size: 20px; font-weight: 400; margin-bottom: 4px; }
+    .form-panel .sub { font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-field label { font-size: 13px; color: var(--muted); }
+    .form-field input, .form-field select, .form-field textarea {
+      width: 100%; padding: 12px 14px; border-radius: 8px;
+      border: 1.5px solid #e5e7eb; font-size: 15px; font-family: var(--font-main);
+      outline: none; transition: border-color .2s, box-shadow .2s; color: var(--text);
+      background: #fff;
+    }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+      border-color: #5DBED8; box-shadow: 0 0 0 3px rgba(93,190,216,.15);
+    }
+    .form-field textarea { resize: vertical; min-height: 80px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-row .form-field { margin-bottom: 0; }
+
+    /* Time slots */
+    .time-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+    .time-slot {
+      padding: 10px 8px; border-radius: 8px; border: 1.5px solid #e5e7eb;
+      text-align: center; font-size: 13px; cursor: pointer;
+      transition: border-color .2s, background .2s, color .2s;
+    }
+    .time-slot:hover { border-color: #5DBED8; }
+    .time-slot.selected { border-color: #0057B8; background: linear-gradient(135deg, rgba(93,190,216,0.1), rgba(0,87,184,0.1)); color: #0057B8; font-weight: 500; }
+    .section-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 500; margin-bottom: 12px; margin-top: 24px; }
+
+    /* Days */
+    .day-slots { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 8px; }
+    .day-slot {
+      padding: 8px 4px; border-radius: 8px; border: 1.5px solid #e5e7eb;
+      text-align: center; font-size: 12px; cursor: pointer; line-height: 1.4;
+      transition: border-color .2s, background .2s, color .2s;
+    }
+    .day-slot .day-name { font-weight: 500; }
+    .day-slot .day-date { color: var(--muted); font-size: 11px; }
+    .day-slot:hover { border-color: #5DBED8; }
+    .day-slot.selected { border-color: #0057B8; background: linear-gradient(135deg, rgba(93,190,216,0.1), rgba(0,87,184,0.1)); color: #0057B8; }
+    .day-slot.selected .day-date { color: #0057B8; }
+
+    .btn-submit {
+      width: 100%; padding: 16px 24px; border-radius: 10px; border: none;
+      background: var(--grad); color: #fff; font-family: var(--font-main);
+      font-size: 16px; font-weight: 500; cursor: pointer;
+      transition: opacity .2s, transform .15s; margin-top: 24px;
+    }
+    .btn-submit:hover { opacity: .88; transform: scale(1.01); }
+
+    /* Success */
+    .success-wrap { display: none; text-align: center; padding: 48px 24px; }
+    .success-wrap .check-circle { width: 72px; height: 72px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+    .success-wrap h2 { font-size: 26px; margin-bottom: 12px; }
+    .success-wrap p { font-family: var(--font-serif); font-style: italic; font-size: 16px; color: var(--muted); line-height: 1.65; }
+    .success-wrap a { display: inline-block; margin-top: 24px; padding: 12px 28px; border-radius: 8px; background: var(--grad); color: #fff; font-size: 15px; font-weight: 500; }
+
+    @media (max-width: 700px) {
+      main { padding: 24px 16px; gap: 24px; }
+      .left-panel { max-width: 100%; }
+      .form-row { grid-template-columns: 1fr; }
+      .time-slots { grid-template-columns: repeat(2, 1fr); }
+      .day-slots { grid-template-columns: repeat(5, 1fr); }
+      .form-panel { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Integrate Health" /></a>
+    <a href="index.html" style="font-size:14px;color:var(--muted);">← back</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- Left -->
+  <div class="left-panel">
+    <h1>let's find out if it's a fit.</h1>
+    <p class="tagline">Book a 20-minute call with one of our specialists. No pressure — just a conversation about your workflow.</p>
+    <div class="what-to-expect">
+      <div class="expect-item">
+        <div class="expect-num">1</div>
+        <div><strong>We learn about your practice</strong><p>Tell us how you work — we'll listen before we say anything.</p></div>
+      </div>
+      <div class="expect-item">
+        <div class="expect-num">2</div>
+        <div><strong>We show you what's relevant</strong><p>A focused walkthrough of the features that match your workflow.</p></div>
+      </div>
+      <div class="expect-item">
+        <div class="expect-num">3</div>
+        <div><strong>You decide</strong><p>No hard sell. If it's not a fit, we'll tell you.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="form-panel">
+    <div id="formSection">
+      <h2>schedule a 20-min call</h2>
+      <p class="sub">pick a time that works for you</p>
+
+      <div class="section-label">select a day</div>
+      <div class="day-slots" id="daySlots"></div>
+
+      <div class="section-label">select a time</div>
+      <div class="time-slots" id="timeSlots"></div>
+
+      <div class="section-label">your info</div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>first name</label>
+          <input type="text" autocomplete="given-name" required />
+        </div>
+        <div class="form-field">
+          <label>last name</label>
+          <input type="text" autocomplete="family-name" required />
+        </div>
+      </div>
+      <div class="form-field">
+        <label>email</label>
+        <input type="email" autocomplete="email" required />
+      </div>
+      <div class="form-field">
+        <label>clinic / practice name</label>
+        <input type="text" autocomplete="organization" required />
+      </div>
+      <div class="form-field">
+        <label>anything you'd like us to know? <span style="color:var(--muted);font-style:italic">(optional)</span></label>
+        <textarea placeholder="e.g. I currently use Jane App, I see 20 patients/week..."></textarea>
+      </div>
+
+      <button class="btn-submit" onclick="handleSchedule()">confirm my call →</button>
+    </div>
+
+    <div class="success-wrap" id="successMsg">
+      <div class="check-circle">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><polyline points="7,18 14,25 29,10" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2>you're on the calendar!</h2>
+      <p>a calendar invite is on its way to your inbox.<br />we're looking forward to connecting.</p>
+      <a href="index.html">← back to home</a>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  // Generate next 5 weekdays
+  const daySlots = document.getElementById('daySlots');
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let d = new Date(); d.setDate(d.getDate() + 1);
+  let count = 0;
+  while (count < 5) {
+    if (d.getDay() !== 0 && d.getDay() !== 6) {
+      const slot = document.createElement('div');
+      slot.className = 'day-slot' + (count === 0 ? ' selected' : '');
+      slot.innerHTML = `<div class="day-name">${days[d.getDay()]}</div><div class="day-date">${months[d.getMonth()]} ${d.getDate()}</div>`;
+      slot.addEventListener('click', () => {
+        document.querySelectorAll('.day-slot').forEach(s => s.classList.remove('selected'));
+        slot.classList.add('selected');
+      });
+      daySlots.appendChild(slot);
+      count++;
+    }
+    d.setDate(d.getDate() + 1);
+  }
+
+  // Time slots
+  const times = ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM'];
+  const timeContainer = document.getElementById('timeSlots');
+  times.forEach((t, i) => {
+    const slot = document.createElement('div');
+    slot.className = 'time-slot' + (i === 0 ? ' selected' : '');
+    slot.textContent = t;
+    slot.addEventListener('click', () => {
+      document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+      slot.classList.add('selected');
+    });
+    timeContainer.appendChild(slot);
+  });
+
+  function handleSchedule() {
+    const inputs = document.querySelectorAll('#formSection input[required]');
+    let valid = true;
+    inputs.forEach(inp => {
+      inp.style.borderColor = '';
+      if (!inp.value.trim()) { inp.style.borderColor = '#ef4444'; valid = false; }
+    });
+    if (!valid) return;
+    document.getElementById('formSection').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>

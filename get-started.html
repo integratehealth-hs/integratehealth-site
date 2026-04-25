@@ -196,6 +196,13 @@
   // Form submit
   document.getElementById('signupForm').addEventListener('submit', (e) => {
     e.preventDefault();
+    const inputs = document.querySelectorAll('#signupForm input[required]');
+    let valid = true;
+    inputs.forEach(inp => {
+      inp.style.borderColor = '';
+      if (!inp.value.trim()) { inp.style.borderColor = '#ef4444'; valid = false; }
+    });
+    if (!valid) return;
     document.getElementById('formSection').style.display = 'none';
     document.getElementById('successMsg').style.display = 'block';
   });
