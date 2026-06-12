@@ -4,9 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Checkout – Integrate Health</title>
+  <!-- Transactional page: keep OUT of search results -->
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&family=Petrona:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+
+  <!-- Stripe.js — must load from js.stripe.com, never self-host -->
+  <script src="https://js.stripe.com/v3/"></script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -60,14 +66,18 @@
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
     .form-field label { font-size: 13px; color: var(--muted); }
-    .form-field input {
+    .form-field input,
+    .stripe-input {
       width: 100%; padding: 12px 14px; border-radius: 8px;
       border: 1.5px solid #e5e7eb; font-size: 15px; font-family: var(--font-main);
       outline: none; transition: border-color .2s, box-shadow .2s; color: var(--text);
       background: #fff;
     }
-    .form-field input:focus { border-color: #5DBED8; box-shadow: 0 0 0 3px rgba(93,190,216,.15); }
+    .form-field input:focus,
+    .stripe-input.StripeElement--focus { border-color: #5DBED8; box-shadow: 0 0 0 3px rgba(93,190,216,.15); }
+    .stripe-input.StripeElement--invalid { border-color: #ef4444; }
     .card-fields { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; }
+    .field-error { color: #ef4444; font-size: 12px; margin-top: 4px; min-height: 14px; }
     .btn-submit {
       width: 100%; padding: 16px 24px; border-radius: 10px; border: none;
       background: var(--grad); color: #fff; font-family: var(--font-main);
@@ -75,8 +85,22 @@
       transition: opacity .2s, transform .15s; margin-top: 24px;
       letter-spacing: 0.02em;
     }
-    .btn-submit:hover { opacity: .88; transform: scale(1.01); }
+    .btn-submit:hover:not(:disabled) { opacity: .88; transform: scale(1.01); }
+    .btn-submit:disabled { opacity: .6; cursor: not-allowed; }
+    .btn-submit .spinner {
+      display: none; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.4);
+      border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite;
+      vertical-align: middle; margin-right: 8px;
+    }
+    .btn-submit.loading .spinner { display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
     .secure-note { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; font-size: 12px; color: var(--muted); }
+    .form-error {
+      background: #fef2f2; border: 1px solid #fecaca; color: #991b1b;
+      padding: 12px 14px; border-radius: 8px; font-size: 13px; margin-top: 16px;
+      display: none;
+    }
+    .form-error.visible { display: block; }
 
     /* SUCCESS */
     .success-wrap { display: none; text-align: center; padding: 48px 24px; }
@@ -118,8 +142,8 @@
       <button class="active" id="btnMonthly" onclick="setBilling('monthly')">Monthly</button>
       <button id="btnAnnual" onclick="setBilling('annual')">Annual <span class="discount-badge">5% off</span></button>
     </div>
-    <div class="plan-price" id="planPrice">$189 <span>/ user / month</span></div>
-    <div class="annual-total" id="annualTotal">$2,155 billed annually per user</div>
+    <div class="plan-price" id="planPrice">$119 <span>/ user / month</span></div>
+    <div class="annual-total" id="annualTotal">$1,356 billed annually per user</div>
     <hr class="divider" />
     <div class="feature-list">
       <div class="feature-item"><div class="check"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Unlimited AI note generation</div>
@@ -133,7 +157,7 @@
 
   <!-- Checkout Form -->
   <div class="checkout-form">
-    <div id="formSection">
+    <form id="formSection" novalidate>
       <h1>complete your setup</h1>
       <p class="sub">you'll be up and running in minutes.</p>
 
@@ -158,31 +182,39 @@
       </div>
 
       <div class="section-label">payment</div>
+
+      <!-- Stripe Card Number -->
       <div class="form-field">
-        <label for="cardNumber">card number</label>
-        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required />
+        <label for="card-number-element">card number</label>
+        <div id="card-number-element" class="stripe-input"></div>
       </div>
+
+      <!-- Stripe Expiry / CVC + plain ZIP (Stripe collects postal in the postal_code field of cardNumber by default; we use our own to match design) -->
       <div class="card-fields">
         <div class="form-field" style="margin-bottom:0">
-          <label for="expiry">expiry</label>
-          <input type="text" id="expiry" placeholder="MM / YY" maxlength="7" required />
+          <label for="card-expiry-element">expiry</label>
+          <div id="card-expiry-element" class="stripe-input"></div>
         </div>
         <div class="form-field" style="margin-bottom:0">
-          <label for="cvc">CVC</label>
-          <input type="text" id="cvc" placeholder="•••" maxlength="4" required />
+          <label for="card-cvc-element">CVC</label>
+          <div id="card-cvc-element" class="stripe-input"></div>
         </div>
         <div class="form-field" style="margin-bottom:0">
           <label for="zip">ZIP</label>
-          <input type="text" id="zip" placeholder="10001" maxlength="5" required />
+          <input type="text" id="zip" placeholder="10001" maxlength="10" autocomplete="postal-code" required />
         </div>
       </div>
 
-      <button class="btn-submit" onclick="handleCheckout()">complete my purchase →</button>
+      <div class="form-error" id="formError"></div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <span class="spinner"></span><span class="btn-text">complete my purchase →</span>
+      </button>
       <div class="secure-note">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         256-bit SSL encryption · HIPAA compliant · cancel anytime
       </div>
-    </div>
+    </form>
 
     <div class="success-wrap" id="successMsg">
       <div class="check-circle">
@@ -197,45 +229,173 @@
 </main>
 
 <script>
+  /* ---------------- Stripe configuration ----------------
+     Publishable key + Price IDs are READ FROM window.STRIPE_CONFIG below.
+     This block is safe to commit — publishable keys are public by design.
+     Replace the placeholder values with your real Stripe values, OR have
+     Vercel inject them at build time via NEXT_PUBLIC_* env vars and write
+     them into this object server-side.
+     ------------------------------------------------------- */
+  window.STRIPE_CONFIG = {
+    publishableKey: 'pk_test_REPLACE_ME',
+    priceMonthly:   'price_REPLACE_MONTHLY_ID',
+    priceAnnual:    'price_REPLACE_ANNUAL_ID',
+  };
+
+  let currentBilling = 'monthly';
+
   function setBilling(type) {
+    currentBilling = type;
     const price = document.getElementById('planPrice');
     const total = document.getElementById('annualTotal');
     const btnM = document.getElementById('btnMonthly');
     const btnA = document.getElementById('btnAnnual');
     if (type === 'annual') {
-      price.innerHTML = '$179 <span>/ user / month</span>';
+      price.innerHTML = '$113 <span>/ user / month</span>';
       total.style.display = 'block';
       btnA.classList.add('active'); btnM.classList.remove('active');
     } else {
-      price.innerHTML = '$189 <span>/ user / month</span>';
+      price.innerHTML = '$119 <span>/ user / month</span>';
       total.style.display = 'none';
       btnM.classList.add('active'); btnA.classList.remove('active');
     }
   }
 
-  // Card number formatting
-  document.getElementById('cardNumber').addEventListener('input', function(e) {
-    let v = e.target.value.replace(/\D/g,'').substring(0,16);
-    e.target.value = v.replace(/(.{4})/g,'$1 ').trim();
-  });
-  document.getElementById('expiry').addEventListener('input', function(e) {
-    let v = e.target.value.replace(/\D/g,'').substring(0,4);
-    if (v.length >= 2) v = v.substring(0,2) + ' / ' + v.substring(2);
-    e.target.value = v;
+  /* ---------------- Stripe Elements ---------------- */
+  const stripe = Stripe(window.STRIPE_CONFIG.publishableKey);
+  const elements = stripe.elements({
+    fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&display=swap' }]
   });
 
-  function handleCheckout() {
-    const inputs = document.querySelectorAll('#formSection input[required]');
-    let valid = true;
-    inputs.forEach(inp => {
-      inp.style.borderColor = '';
-      if (!inp.value.trim()) { inp.style.borderColor = '#ef4444'; valid = false; }
-    });
-    if (!valid) return;
-    document.getElementById('formSection').style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
-    window.scrollTo(0, 0);
+  // Style each Stripe Element to match our native inputs
+  const elementStyle = {
+    base: {
+      fontFamily: 'Karla, sans-serif',
+      fontSize: '15px',
+      color: '#333333',
+      '::placeholder': { color: '#9ca3af' },
+      lineHeight: '24px',
+    },
+    invalid: { color: '#ef4444' },
+  };
+
+  const cardNumber = elements.create('cardNumber', { style: elementStyle, showIcon: true, placeholder: '1234 5678 9012 3456' });
+  const cardExpiry = elements.create('cardExpiry', { style: elementStyle, placeholder: 'MM / YY' });
+  const cardCvc    = elements.create('cardCvc',    { style: elementStyle, placeholder: '•••' });
+
+  cardNumber.mount('#card-number-element');
+  cardExpiry.mount('#card-expiry-element');
+  cardCvc.mount('#card-cvc-element');
+
+  /* ---------------- Submit ---------------- */
+  const form = document.getElementById('formSection');
+  const submitBtn = document.getElementById('submitBtn');
+  const errorBox = document.getElementById('formError');
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('visible');
   }
+  function clearError() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('visible');
+  }
+  function setLoading(isLoading) {
+    submitBtn.disabled = isLoading;
+    submitBtn.classList.toggle('loading', isLoading);
+    submitBtn.querySelector('.btn-text').textContent =
+      isLoading ? 'processing…' : 'complete my purchase →';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearError();
+
+    // Validate plain inputs
+    const required = ['firstName', 'lastName', 'email', 'clinic', 'zip'];
+    let valid = true;
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      el.style.borderColor = '';
+      if (!el.value.trim()) { el.style.borderColor = '#ef4444'; valid = false; }
+    });
+    if (!valid) { showError('Please complete the highlighted fields.'); return; }
+
+    setLoading(true);
+
+    try {
+      const priceId = currentBilling === 'annual'
+        ? window.STRIPE_CONFIG.priceAnnual
+        : window.STRIPE_CONFIG.priceMonthly;
+
+      // 1) Ask our backend to create a Customer + incomplete Subscription
+      const res = await fetch('/api/create-subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          priceId,
+          email: document.getElementById('email').value.trim(),
+          firstName: document.getElementById('firstName').value.trim(),
+          lastName: document.getElementById('lastName').value.trim(),
+          clinic: document.getElementById('clinic').value.trim(),
+        }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || `Server error (${res.status})`);
+      }
+
+      const { clientSecret, subscriptionId } = await res.json();
+
+      // 2) Confirm the PaymentIntent attached to the subscription's first invoice
+      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardNumber,
+          billing_details: {
+            name: document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            address: { postal_code: document.getElementById('zip').value.trim() },
+          },
+        },
+      });
+
+      if (error) {
+        // Card declined, 3DS failed, etc.
+        throw new Error(error.message || 'Your card was declined.');
+      }
+
+      if (paymentIntent && paymentIntent.status === 'succeeded') {
+        // Success! Webhook will mark the subscription active server-side.
+        document.getElementById('formSection').style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+        window.scrollTo(0, 0);
+        // Optional: persist subscriptionId for the welcome page / analytics
+        try { sessionStorage.setItem('ih_subscription_id', subscriptionId); } catch (_) {}
+
+        // Notify the team + send the customer a welcome email.
+        // Fire-and-forget: the payment already succeeded, so never block the UI on this.
+        fetch('/api/notify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: 'buy',
+            firstName: document.getElementById('firstName').value.trim(),
+            lastName:  document.getElementById('lastName').value.trim(),
+            email:     document.getElementById('email').value.trim(),
+            clinic:    document.getElementById('clinic').value.trim(),
+          }),
+        }).catch((e) => console.error('notify failed:', e));
+      } else {
+        // requires_action handled automatically by confirmCardPayment; anything else is unexpected
+        throw new Error('Payment did not complete. Please try again.');
+      }
+    } catch (err) {
+      console.error(err);
+      showError(err.message || 'Something went wrong. Please try again.');
+      setLoading(false);
+    }
+  });
 </script>
 </body>
 </html>

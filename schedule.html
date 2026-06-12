@@ -227,7 +227,7 @@
     timeContainer.appendChild(slot);
   });
 
-  function handleSchedule() {
+  async function handleSchedule() {
     const inputs = document.querySelectorAll('#formSection input[required]');
     let valid = true;
     inputs.forEach(inp => {
@@ -235,9 +235,35 @@
       if (!inp.value.trim()) { inp.style.borderColor = '#ef4444'; valid = false; }
     });
     if (!valid) return;
-    document.getElementById('formSection').style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
-    window.scrollTo(0, 0);
+
+    const [firstName, lastName, email, clinic] = [...inputs].map(i => i.value.trim());
+    const note = (document.querySelector('#formSection textarea')?.value || '').trim();
+    const daySel = document.querySelector('.day-slot.selected');
+    const day = daySel ? daySel.textContent.replace(/\s+/g, ' ').trim() : '';
+    const timeSel = document.querySelector('.time-slot.selected');
+    const time = timeSel ? timeSel.textContent.trim() : '';
+
+    const btn = document.querySelector('.btn-submit');
+    const label = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'sending…';
+
+    try {
+      const res = await fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'sales', firstName, lastName, email, clinic, note, day, time }),
+      });
+      if (!res.ok) throw new Error('send failed');
+      document.getElementById('formSection').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+      window.scrollTo(0, 0);
+    } catch (err) {
+      console.error(err);
+      btn.disabled = false;
+      btn.textContent = label;
+      alert("Sorry — something went wrong booking that. Please try again, or email us at hello@integratehealth.ai.");
+    }
   }
 </script>
 </body>
