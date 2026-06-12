@@ -1,28 +1,13 @@
-# Email notifications — files to update
+# Redeploy — files to push since last night
 
-These are the files that changed to make the lead forms send emails.
-Drop each one into the **same path** in your project/repo, replacing the
-existing file (only `api/notify.js` is brand new).
+Drop these into your repo (same paths), commit, and push. Vercel redeploys automatically.
 
-| File in this folder | Goes to (in your repo) | New or changed |
-|---------------------|------------------------|----------------|
-| `api/notify.js` | `api/notify.js` | 🆕 new file |
-| `get-started.html` | `get-started.html` | changed (demo form wired up) |
-| `schedule.html` | `schedule.html` | changed (sales form wired up) |
-| `checkout.html` | `checkout.html` | changed (buy → notify on success) |
-| `package.json` | `package.json` | changed (added `nodemailer`) |
-| `.env.example` | `.env.example` | changed (documents the new vars) |
-| `NOTIFICATIONS_SETUP.md` | `NOTIFICATIONS_SETUP.md` | 🆕 setup guide |
+| File in this folder | Goes to (in your repo) | What changed |
+|---------------------|------------------------|--------------|
+| `schedule.html` | `schedule.html` (root) | Real Google booking calendar embedded (replaces the mock slot-picker) |
+| `api/notify.js` | `api/notify.js` | Integrate-branded emails (logo, gradient, Karla/Petrona) |
 
-## After you copy these in
-1. Commit & push so Vercel deploys (or however you deploy).
-2. In Vercel → Settings → Environment Variables, add the 6 values:
-   - `SMTP_USER` = `hallesutton@integratehealth.ai`
-   - `SMTP_PASS` = your 16-char Google **app password**
-   - `SMTP_HOST` = `smtp.gmail.com`
-   - `SMTP_PORT` = `465`
-   - `FROM_EMAIL` = `Integrate Health <hallesutton@integratehealth.ai>`
-   - `TEAM_INBOX` = `hallesutton@integratehealth.ai`
-3. Redeploy, then test by submitting the form on `get-started.html` on the live site.
+That's everything for the website. No environment-variable changes needed.
 
-Full details are in `NOTIFICATIONS_SETUP.md`.
+Not in here (on purpose):
+- `booking-emails.gs` → already installed in Google Apps Script; it is NOT part of the website and does not get deployed.

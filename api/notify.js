@@ -28,6 +28,14 @@ const nodemailer = require('nodemailer');
 
 const BRAND_BLUE = '#0057B8';
 const BRAND_CYAN = '#5DBED8';
+const INK = '#333333';
+const MUTED = '#666666';
+// Logo is served from the live site (email clients need an absolute URL).
+const LOGO_URL = 'https://integratehealth.ai/assets/logo.png';
+// Karla / Petrona load in clients that support web fonts (e.g. Apple Mail);
+// everywhere else (Gmail, Outlook) the web-safe fallbacks keep the look close.
+const FONT_SANS = "'Karla', Arial, Helvetica, sans-serif";
+const FONT_SERIF = "'Petrona', Georgia, 'Times New Roman', serif";
 
 // ── Per-flow copy ────────────────────────────────────────────────────────
 const FLOWS = {
@@ -65,18 +73,29 @@ const FLOWS = {
 
 // ── Email chrome ─────────────────────────────────────────────────────────
 function shell(innerHtml) {
-  return `<!DOCTYPE html><html><body style="margin:0;padding:0;background:#f4f6f9;">
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&family=Petrona:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+    body{margin:0;padding:0;}
+    a{text-decoration:none;}
+  </style></head>
+  <body style="margin:0;padding:0;background:#f4f6f9;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f9;padding:32px 16px;">
     <tr><td align="center">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,0.06);">
-        <tr><td style="background:${BRAND_BLUE};padding:22px 28px;">
-          <span style="font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:22px;color:#ffffff;font-weight:600;letter-spacing:.2px;">Integrate&nbsp;Health</span>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;background:#ffffff;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,87,184,0.08);">
+        <!-- Logo header on white, the way it sits on the site -->
+        <tr><td align="center" style="padding:30px 28px 22px;">
+          <img src="${LOGO_URL}" alt="Integrate Health" width="190" style="display:block;width:190px;max-width:60%;height:auto;" />
         </td></tr>
-        <tr><td style="padding:32px 28px;font-family:Helvetica,Arial,sans-serif;color:#1a1a1a;">
+        <!-- Gradient accent bar (solid fallback first) -->
+        <tr><td style="height:4px;line-height:4px;font-size:0;background:${BRAND_BLUE};background:linear-gradient(90deg,#5DBED8 0%,#0057B8 100%);">&nbsp;</td></tr>
+        <tr><td style="padding:34px 32px;font-family:${FONT_SANS};color:${INK};">
           ${innerHtml}
         </td></tr>
-        <tr><td style="padding:18px 28px;border-top:1px solid #eef1f4;font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#98a2b3;">
-          Integrate Health, LLC · This message was sent because a form was submitted on integratehealth.ai
+        <tr><td style="padding:20px 32px;border-top:1px solid #eef1f4;font-family:${FONT_SANS};font-size:12px;line-height:1.6;color:#98a2b3;">
+          <a href="https://integratehealth.ai" style="color:${BRAND_BLUE};font-weight:500;">integratehealth.ai</a><br>
+          Integrate Health, LLC · the AI scribe built for functional medicine<br>
+          You received this because a form was submitted on integratehealth.ai.
         </td></tr>
       </table>
     </td></tr>
@@ -86,8 +105,8 @@ function shell(innerHtml) {
 function row(label, value) {
   if (!value) return '';
   return `<tr>
-    <td style="padding:8px 0;font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#98a2b3;width:130px;vertical-align:top;">${label}</td>
-    <td style="padding:8px 0;font-family:Helvetica,Arial,sans-serif;font-size:14px;color:#1a1a1a;">${esc(value)}</td>
+    <td style="padding:9px 0;font-family:${FONT_SANS};font-size:12px;letter-spacing:.4px;text-transform:uppercase;color:#98a2b3;width:140px;vertical-align:top;">${label}</td>
+    <td style="padding:9px 0;font-family:${FONT_SANS};font-size:15px;color:${INK};">${esc(value)}</td>
   </tr>`;
 }
 
@@ -150,9 +169,9 @@ module.exports = async (req, res) => {
 
     // 1) TEAM notification ------------------------------------------------
     const teamHtml = shell(`
-      <p style="margin:0 0 6px;font-family:Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:.6px;text-transform:uppercase;color:${BRAND_CYAN};font-weight:700;">New lead</p>
-      <h1 style="margin:0 0 14px;font-family:Helvetica,Arial,sans-serif;font-size:21px;color:#1a1a1a;">${esc(flow.teamLead)}</h1>
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+      <p style="margin:0 0 6px;font-family:${FONT_SANS};font-size:12px;letter-spacing:.8px;text-transform:uppercase;color:${BRAND_CYAN};font-weight:600;">new lead</p>
+      <h1 style="margin:0 0 22px;font-family:${FONT_SANS};font-size:22px;font-weight:500;color:${INK};">${esc(flow.teamLead)}</h1>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-top:1px solid #eef1f4;">
         ${row('Name', name)}
         ${row('Email', email)}
         ${row('Phone', phone)}
@@ -161,16 +180,16 @@ module.exports = async (req, res) => {
         ${row('Requested time', time)}
         ${row('Note', note)}
       </table>
-      <p style="margin:22px 0 0;font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#667085;">Reply to this email to respond to ${esc(name)} directly.</p>
+      <p style="margin:24px 0 0;font-family:${FONT_SANS};font-size:13px;color:${MUTED};">Just hit reply to respond to ${esc(name)} directly — their address is set as the reply-to.</p>
     `);
 
     // 2) CUSTOMER confirmation -------------------------------------------
     const custHtml = shell(`
-      <h1 style="margin:0 0 14px;font-family:Georgia,serif;font-style:italic;font-size:26px;color:${BRAND_BLUE};font-weight:600;">${esc(flow.custHeading)}</h1>
-      <p style="margin:0 0 18px;font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.65;color:#3a3f45;">Hi ${esc(firstName || 'there')},</p>
-      <p style="margin:0 0 18px;font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.65;color:#3a3f45;">${esc(flow.custBody)}</p>
-      ${day || time ? `<p style="margin:0 0 18px;font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.65;color:#3a3f45;"><strong>Your time:</strong> ${esc([day, time].filter(Boolean).join(' · '))}</p>` : ''}
-      <p style="margin:0;font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.65;color:#3a3f45;">— The Integrate Health team</p>
+      <h1 style="margin:0 0 18px;font-family:${FONT_SERIF};font-style:italic;font-size:30px;line-height:1.2;color:${BRAND_BLUE};font-weight:500;">${esc(flow.custHeading)}</h1>
+      <p style="margin:0 0 18px;font-family:${FONT_SANS};font-size:16px;line-height:1.7;color:${INK};">Hi ${esc(firstName || 'there')},</p>
+      <p style="margin:0 0 18px;font-family:${FONT_SANS};font-size:16px;line-height:1.7;color:${INK};">${esc(flow.custBody)}</p>
+      ${day || time ? `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 22px;"><tr><td style="border-left:3px solid ${BRAND_CYAN};padding:4px 0 4px 14px;font-family:${FONT_SANS};font-size:15px;color:${INK};"><span style="color:${MUTED};">your time:</span> ${esc([day, time].filter(Boolean).join(' · '))}</td></tr></table>` : ''}
+      <p style="margin:28px 0 0;font-family:${FONT_SERIF};font-style:italic;font-size:16px;color:${MUTED};">— the Integrate Health team</p>
     `);
 
     // Send both. Team email first so a lead is never lost even if the

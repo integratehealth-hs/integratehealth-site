@@ -42,9 +42,11 @@
     .expect-item p { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
     /* FORM PANEL */
-    .form-panel { background: #fff; border-radius: 16px; border: 1.5px solid #e5e7eb; padding: 36px; width: 100%; max-width: 500px; }
+    .form-panel { background: #fff; border-radius: 16px; border: 1.5px solid #e5e7eb; padding: 36px; width: 100%; max-width: 560px; }
     .form-panel h2 { font-size: 20px; font-weight: 400; margin-bottom: 4px; }
-    .form-panel .sub { font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+    .form-panel .sub { font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+    .cal-embed { border-radius: 10px; overflow: hidden; border: 1px solid #e5e7eb; }
+    .cal-embed iframe { display: block; width: 100%; min-height: 600px; }
     .form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
     .form-field label { font-size: 13px; color: var(--muted); }
     .form-field input, .form-field select, .form-field textarea {
@@ -140,131 +142,18 @@
     </div>
   </div>
 
-  <!-- Form -->
+  <!-- Booking calendar (Google Appointment Schedule) -->
   <div class="form-panel">
-    <div id="formSection">
-      <h2>schedule a 20-min call</h2>
-      <p class="sub">pick a time that works for you</p>
-
-      <div class="section-label">select a day</div>
-      <div class="day-slots" id="daySlots"></div>
-
-      <div class="section-label">select a time</div>
-      <div class="time-slots" id="timeSlots"></div>
-
-      <div class="section-label">your info</div>
-      <div class="form-row">
-        <div class="form-field">
-          <label>first name</label>
-          <input type="text" autocomplete="given-name" required />
-        </div>
-        <div class="form-field">
-          <label>last name</label>
-          <input type="text" autocomplete="family-name" required />
-        </div>
-      </div>
-      <div class="form-field">
-        <label>email</label>
-        <input type="email" autocomplete="email" required />
-      </div>
-      <div class="form-field">
-        <label>clinic / practice name</label>
-        <input type="text" autocomplete="organization" required />
-      </div>
-      <div class="form-field">
-        <label>anything you'd like us to know? <span style="color:var(--muted);font-style:italic">(optional)</span></label>
-        <textarea placeholder="e.g. I currently use Jane App, I see 20 patients/week..."></textarea>
-      </div>
-
-      <button class="btn-submit" onclick="handleSchedule()">confirm my call →</button>
-    </div>
-
-    <div class="success-wrap" id="successMsg">
-      <div class="check-circle">
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><polyline points="7,18 14,25 29,10" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <h2>you're on the calendar!</h2>
-      <p>a calendar invite is on its way to your inbox.<br />we're looking forward to connecting.</p>
-      <a href="index.html">← back to home</a>
+    <h2>schedule a 20-min call</h2>
+    <p class="sub">pick a time that works for you — you'll get a calendar invite instantly.</p>
+    <div class="cal-embed">
+      <!-- Google Calendar Appointment Scheduling begin -->
+      <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0MFwRg1yyuuVusOrtBtEuX1LkWYoKa6zqeHXE4EyzTtDS7Mr6YMHgmFRxWhsIW8jhhCLQX6HbP?gv=true" style="border:0" width="100%" height="600" frameborder="0" title="Book a call with Integrate Health"></iframe>
+      <!-- end Google Calendar Appointment Scheduling -->
     </div>
   </div>
 
 </main>
 
-<script>
-  // Generate next 5 weekdays
-  const daySlots = document.getElementById('daySlots');
-  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  let d = new Date(); d.setDate(d.getDate() + 1);
-  let count = 0;
-  while (count < 5) {
-    if (d.getDay() !== 0 && d.getDay() !== 6) {
-      const slot = document.createElement('div');
-      slot.className = 'day-slot' + (count === 0 ? ' selected' : '');
-      slot.innerHTML = `<div class="day-name">${days[d.getDay()]}</div><div class="day-date">${months[d.getMonth()]} ${d.getDate()}</div>`;
-      slot.addEventListener('click', () => {
-        document.querySelectorAll('.day-slot').forEach(s => s.classList.remove('selected'));
-        slot.classList.add('selected');
-      });
-      daySlots.appendChild(slot);
-      count++;
-    }
-    d.setDate(d.getDate() + 1);
-  }
-
-  // Time slots
-  const times = ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM'];
-  const timeContainer = document.getElementById('timeSlots');
-  times.forEach((t, i) => {
-    const slot = document.createElement('div');
-    slot.className = 'time-slot' + (i === 0 ? ' selected' : '');
-    slot.textContent = t;
-    slot.addEventListener('click', () => {
-      document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-      slot.classList.add('selected');
-    });
-    timeContainer.appendChild(slot);
-  });
-
-  async function handleSchedule() {
-    const inputs = document.querySelectorAll('#formSection input[required]');
-    let valid = true;
-    inputs.forEach(inp => {
-      inp.style.borderColor = '';
-      if (!inp.value.trim()) { inp.style.borderColor = '#ef4444'; valid = false; }
-    });
-    if (!valid) return;
-
-    const [firstName, lastName, email, clinic] = [...inputs].map(i => i.value.trim());
-    const note = (document.querySelector('#formSection textarea')?.value || '').trim();
-    const daySel = document.querySelector('.day-slot.selected');
-    const day = daySel ? daySel.textContent.replace(/\s+/g, ' ').trim() : '';
-    const timeSel = document.querySelector('.time-slot.selected');
-    const time = timeSel ? timeSel.textContent.trim() : '';
-
-    const btn = document.querySelector('.btn-submit');
-    const label = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'sending…';
-
-    try {
-      const res = await fetch('/api/notify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'sales', firstName, lastName, email, clinic, note, day, time }),
-      });
-      if (!res.ok) throw new Error('send failed');
-      document.getElementById('formSection').style.display = 'none';
-      document.getElementById('successMsg').style.display = 'block';
-      window.scrollTo(0, 0);
-    } catch (err) {
-      console.error(err);
-      btn.disabled = false;
-      btn.textContent = label;
-      alert("Sorry — something went wrong booking that. Please try again, or email us at hello@integratehealth.ai.");
-    }
-  }
-</script>
 </body>
 </html>
