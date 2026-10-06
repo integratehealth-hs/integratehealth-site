@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&family=Petrona:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
 
-  <!-- Stripe.js — must load from js.stripe.com, never self-host -->
+  <!-- Stripe.js, must load from js.stripe.com, never self-host -->
   <script src="https://js.stripe.com/v3/"></script>
 
   <style>
@@ -43,12 +43,15 @@
     .order-summary h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 24px; font-weight: 500; }
     .plan-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
     .plan-name { font-size: 18px; font-weight: 500; }
+    .change-plan { font-size: 13px; color: #0057B8; text-decoration: none; }
+    .change-plan:hover { text-decoration: underline; }
     .plan-badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; background: linear-gradient(90deg,#5DBED8,#0057B8); color: #fff; font-weight: 500; }
     .billing-toggle { display: flex; background: #f3f4f6; border-radius: 10px; padding: 4px; margin-bottom: 20px; }
     .billing-toggle button { flex: 1; padding: 8px 12px; border: none; border-radius: 7px; font-family: var(--font-main); font-size: 13px; cursor: pointer; background: transparent; color: var(--muted); transition: all .2s; }
     .billing-toggle button.active { background: #fff; color: var(--text); font-weight: 500; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
     .discount-badge { display: inline-block; margin-left: 6px; font-size: 11px; padding: 2px 7px; border-radius: 20px; background: linear-gradient(90deg,#5DBED8,#0057B8); color: #fff; font-weight: 600; vertical-align: middle; }
     .plan-price { font-size: 32px; font-weight: 300; color: var(--text); }
+    .plan-price .was { font-size: 18px; color: #999; text-decoration: line-through; margin-right: 8px; }
     .plan-price span { font-size: 14px; color: var(--muted); font-weight: 400; }
     .annual-total { font-size: 12px; color: var(--muted); margin-top: 4px; display: none; }
     .divider { border: none; border-top: 1px solid #e5e7eb; margin: 20px 0; }
@@ -136,22 +139,17 @@
   <div class="order-summary">
     <h2>order summary</h2>
     <div class="plan-row">
-      <span class="plan-name">Core Plan</span>
+      <span class="plan-name" id="planName">Integrate Pro</span>
+      <a href="pricing.html" class="change-plan">change plan</a>
     </div>
     <div class="billing-toggle">
       <button class="active" id="btnMonthly" onclick="setBilling('monthly')">Monthly</button>
       <button id="btnAnnual" onclick="setBilling('annual')">Annual <span class="discount-badge">5% off</span></button>
     </div>
-    <div class="plan-price" id="planPrice">$119 <span>/ user / month</span></div>
-    <div class="annual-total" id="annualTotal">$1,356 billed annually per user</div>
+    <div class="plan-price" id="planPrice"></div>
+    <div class="annual-total" id="annualTotal"></div>
     <hr class="divider" />
-    <div class="feature-list">
-      <div class="feature-item"><div class="check"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Unlimited AI note generation</div>
-      <div class="feature-item"><div class="check"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Functional medicine templates</div>
-      <div class="feature-item"><div class="check"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>EHR integrations</div>
-      <div class="feature-item"><div class="check"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>HIPAA compliant</div>
-      <div class="feature-item"><div class="check"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Priority support</div>
-    </div>
+    <div class="feature-list" id="planFeatures"></div>
 
   </div>
 
@@ -221,7 +219,7 @@
         <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><polyline points="7,18 14,25 29,10" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <h2>welcome to Integrate!</h2>
-      <p>you're all set! An invitation to create your account will be sent to your inbox within 24 hours — we'll have you up and running shortly.</p>
+      <p>you're all set! An invitation to create your account will be sent to your inbox within 24 hours, we'll have you up and running shortly.</p>
       <a href="https://app.integratehealth.ai" target="_blank">open the app →</a>
     </div>
   </div>
@@ -231,35 +229,68 @@
 <script>
   /* ---------------- Stripe configuration ----------------
      Publishable key + Price IDs are READ FROM window.STRIPE_CONFIG below.
-     This block is safe to commit — publishable keys are public by design.
+     This block is safe to commit, publishable keys are public by design.
      Replace the placeholder values with your real Stripe values, OR have
      Vercel inject them at build time via NEXT_PUBLIC_* env vars and write
      them into this object server-side.
      ------------------------------------------------------- */
   window.STRIPE_CONFIG = {
-    publishableKey: 'pk_test_REPLACE_ME',
-    priceMonthly:   'price_REPLACE_MONTHLY_ID',
-    priceAnnual:    'price_REPLACE_ANNUAL_ID',
+    publishableKey: 'pk_live_51TWKiAKB5HsYCfeDcD6gTaNzf1dEfbtV0TuUIjRLlc2dWmbJP9s70a8Iubni7mnGy76GRRBoAKV7h3f93I6Va9t000x3f0B2ZE',
+    // One Stripe Price ID per plan and billing period
+    prices: {
+      essential: { monthly: 'price_REPLACE_ESSENTIAL_MONTHLY', annual: 'price_REPLACE_ESSENTIAL_ANNUAL' },
+      pro:       { monthly: 'price_REPLACE_PRO_MONTHLY',       annual: 'price_REPLACE_PRO_ANNUAL' },
+      practice:  { monthly: 'price_REPLACE_PRACTICE_MONTHLY',  annual: 'price_REPLACE_PRACTICE_ANNUAL' },
+    },
   };
 
+  // Annual = 5% off, rounded to the dollar per month
+  const PLANS = {
+    essential: { name: 'Integrate Essential', monthly: 79,  annual: 75,  unit: '/ month', features: ['1 provider', 'AI documentation', 'Functional-medicine optimized notes', 'Limited custom templates', 'HIPAA compliant', 'Standard support'] },
+    pro:       { name: 'Integrate Pro',       monthly: 129, annual: 123, unit: '/ month', features: ['1 provider', 'Unlimited AI documentation', 'Functional-medicine optimized notes', 'Custom templates', 'EHR sync', 'HIPAA compliant', 'Priority support'] },
+    practice:  { name: 'Integrate Practice',  monthly: 399, annual: 379, unit: '/ month, up to 4 providers', features: ['Up to 4 providers', 'Unlimited AI documentation', 'Practice templates', 'Admin and team tools', 'EHR sync', 'HIPAA compliant', 'Priority support'] },
+  };
+  const qs = new URLSearchParams(location.search);
+  const qp = qs.get('plan');
+  const currentPlan = PLANS[qp] ? qp : 'pro';
+  // Founders rate: Pro at $79/mo for the first 12 months (monthly billing only)
+  const isFounders = currentPlan === 'pro' && qs.get('offer') === 'founders';
   let currentBilling = 'monthly';
+
+  (function renderPlan() {
+    const p = PLANS[currentPlan];
+    document.getElementById('planName').textContent = p.name;
+    document.getElementById('planFeatures').innerHTML = p.features.map(f => '<div class="feature-item"><div class="check"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' + f + '</div>').join('');
+  })();
 
   function setBilling(type) {
     currentBilling = type;
+    const p = PLANS[currentPlan];
     const price = document.getElementById('planPrice');
     const total = document.getElementById('annualTotal');
     const btnM = document.getElementById('btnMonthly');
     const btnA = document.getElementById('btnAnnual');
-    if (type === 'annual') {
-      price.innerHTML = '$113 <span>/ user / month</span>';
+    if (isFounders) type = currentBilling = 'monthly';
+    const amt = type === 'annual' ? p.annual : p.monthly;
+    if (isFounders) {
+      price.innerHTML = '<span class="was">$' + p.monthly + '</span>$79 <span>/ month</span>';
+      total.textContent = 'founders rate for your first 12 months, then $' + p.monthly + '/mo';
       total.style.display = 'block';
-      btnA.classList.add('active'); btnM.classList.remove('active');
     } else {
-      price.innerHTML = '$119 <span>/ user / month</span>';
-      total.style.display = 'none';
-      btnM.classList.add('active'); btnA.classList.remove('active');
+      price.innerHTML = '$' + amt + ' <span>' + p.unit + '</span>';
+      total.textContent = '$' + (p.annual * 12).toLocaleString() + ' billed annually';
+      total.style.display = type === 'annual' ? 'block' : 'none';
     }
+    btnA.classList.toggle('active', type === 'annual');
+    btnM.classList.toggle('active', type !== 'annual');
   }
+  if (isFounders) {
+    document.querySelector('.billing-toggle').style.display = 'none';
+    const tag = document.createElement('span');
+    tag.className = 'plan-badge'; tag.textContent = 'founders rate';
+    document.getElementById('planName').after(tag);
+  }
+  setBilling('monthly');
 
   /* ---------------- Stripe Elements ---------------- */
   const stripe = Stripe(window.STRIPE_CONFIG.publishableKey);
@@ -324,9 +355,7 @@
     setLoading(true);
 
     try {
-      const priceId = currentBilling === 'annual'
-        ? window.STRIPE_CONFIG.priceAnnual
-        : window.STRIPE_CONFIG.priceMonthly;
+      const priceId = window.STRIPE_CONFIG.prices[currentPlan][currentBilling];
 
       // 1) Ask our backend to create a Customer + incomplete Subscription
       const res = await fetch('/api/create-subscription', {
@@ -334,6 +363,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           priceId,
+          offer: isFounders ? 'founders' : '',
           email: document.getElementById('email').value.trim(),
           firstName: document.getElementById('firstName').value.trim(),
           lastName: document.getElementById('lastName').value.trim(),
@@ -380,6 +410,7 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             type: 'buy',
+            plan: PLANS[currentPlan].name + ' (' + currentBilling + (isFounders ? ', founders rate $79/mo for 12 months' : '') + ')',
             firstName: document.getElementById('firstName').value.trim(),
             lastName:  document.getElementById('lastName').value.trim(),
             email:     document.getElementById('email').value.trim(),

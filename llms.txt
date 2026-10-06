@@ -1,0 +1,29 @@
+# Integrate Health
+
+> Integrate Health is an AI medical scribe built specifically for functional, integrative, and holistic medicine practices. It captures full patient visits (including 30+ minute, in-depth appointments), generates structured SOAP notes in seconds, and syncs notes to the practice's EHR in one click. It is HIPAA compliant and signs a Business Associate Agreement (BAA).
+
+Integrate Health is made by Integrate Health, LLC. Unlike general-purpose scribes, it is designed for longer, more detailed visits and understands functional-medicine content such as supplement protocols, lab interpretation, full patient histories, and care plans.
+
+## Key facts
+- Category: AI medical scribe / clinical documentation software
+- Built for: functional, integrative, and holistic medicine practitioners
+- Integrate Essential: $79/month, 1 provider, for light use
+- Founders rate (first 100 clinics only): Integrate Pro at $79/month for the first 12 months, then $129/month
+- Integrate Pro: $129/month, 1 provider, unlimited AI documentation, EHR sync, priority support
+- Integrate Practice: $399/month, up to 4 providers, practice templates, admin and team tools
+- Automate: custom AI agents for intake, scheduling, follow-ups, and billing, priced by quote
+- Compliance: HIPAA compliant, BAA available, data encrypted in transit and at rest
+- Workflow: speak (visit is captured) → summarize (structured SOAP note) → sync (one click to the EHR)
+
+## Pages
+- [Home](https://integratehealth.ai/): overview of the AI scribe for functional medicine
+- [Solutions](https://integratehealth.ai/solutions): functional-medicine documentation features
+- [Pricing](https://integratehealth.ai/pricing): plans and what's included
+- [Integrate Health vs Heidi vs Freed](https://integratehealth.ai/comparison): side-by-side comparison and FAQ
+- [Book a call](https://integratehealth.ai/schedule): 20-minute call with the team
+- [Privacy policy](https://integratehealth.ai/privacy-policy)
+- [Terms of service](https://integratehealth.ai/terms-of-service)
+
+## Contact
+- Email: hallesutton@integratehealth.ai
+- App login: https://app.integratehealth.ai

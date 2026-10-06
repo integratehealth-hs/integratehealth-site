@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Keep transactional, internal & draft files out of search
+Disallow: /checkout
+Disallow: /checkout.html
+Disallow: /api/
+Disallow: /mobile-preview.html
+Disallow: /email-preview.html
+Disallow: /checkout-original-backup.html
+Disallow: /temp_animation_template.html
+Disallow: /*.jsx$
+Disallow: /email-update/
+Disallow: /redeploy/
+Disallow: /screenshots/
+Disallow: /uploads/
+
+Sitemap: https://integratehealth.ai/sitemap.xml

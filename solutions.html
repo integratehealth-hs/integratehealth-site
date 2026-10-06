@@ -3,7 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solutions – Integrate Health</title>
+  <title>Functional Medicine EHR & AI Documentation | Integrate Health</title>
+  <meta name="description" content="See how Integrate Health's AI scribe handles functional medicine documentationlab interpretations, supplement protocols, and intelligent SOAP notes that cut charting time by up to 70%. Works with your existing EHR." />
+  <link rel="canonical" href="https://integratehealth.ai/solutions" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Integrate Health" />
+  <meta property="og:title" content="Functional Medicine EHR & AI Documentation | Integrate Health" />
+  <meta property="og:description" content="AI-powered documentation that understands functional medicinelab interpretation, supplement protocols, intelligent SOAP notes. EHR-integrated, HIPAA compliant." />
+  <meta property="og:url" content="https://integratehealth.ai/solutions" />
+  <meta property="og:image" content="https://integratehealth.ai/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Integrate Health: AI scribe for functional medicine" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Functional Medicine EHR & AI Documentation | Integrate Health" />
+  <meta name="twitter:description" content="AI documentation built for functional medicine. Lab interpretation, supplement protocols, intelligent SOAP notes. EHR-integrated." />
+  <meta name="twitter:image" content="https://integratehealth.ai/assets/og-image.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&family=Petrona:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
@@ -97,6 +117,13 @@
       .footer-right { align-items: center; }
       .footer-copy { text-align: center; }
     }
+    /* shared: link-buttons (anchors styled as buttons) */
+    a.btn-cta,a.btn-primary,a.btn-contact,a.btn-card,a.btn-help{display:inline-block;text-decoration:none;text-align:center;box-sizing:border-box}
+    a.btn-card{display:block}
+    nav a.btn-cta,nav a.btn-cta:hover,a.btn-cta,a.btn-primary,a.btn-card.primary,a.btn-help{color:#fff}
+    a.btn-contact,a.btn-contact:hover{color:#fff}
+    .footer-links{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:flex-end}
+    @media (max-width:900px){.footer-links{justify-content:center}}
   </style>
 </head>
 <body>
@@ -107,8 +134,9 @@
     <nav class="desktop">
       <a href="solutions.html" class="active">solutions</a>
       <a href="pricing.html">pricing</a>
+      <a href="comparison.html">compare</a>
       <a href="https://app.integratehealth.ai" target="_blank" rel="noopener" class="btn-login"><span>log in</span></a>
-      <a href="get-started.html"><button class="btn-cta">get started</button></a>
+      <a href="get-started.html" class="btn-cta">get started</a>
     </nav>
     <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -117,12 +145,13 @@
 </header>
 <div class="mobile-overlay" id="mobileOverlay"></div>
 <div class="mobile-drawer" id="mobileDrawer">
-  <button class="drawer-close" id="drawerClose"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <button class="drawer-close" id="drawerClose" aria-label="Close menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   <nav>
     <a href="solutions.html">solutions</a>
     <a href="pricing.html">pricing</a>
+    <a href="comparison.html">compare</a>
     <a href="https://app.integratehealth.ai" target="_blank">log in</a>
-    <a href="get-started.html"><button class="btn-cta" style="width:100%">get started</button></a>
+    <a href="get-started.html" class="btn-cta" style="width:100%">get started</a>
   </nav>
 </div>
 
@@ -138,7 +167,7 @@
       <div class="solution-card">
         <div>
           <h2>comprehensive documentation</h2>
-          <p>Capture every detail of your functional medicine visits—from lifestyle factors and supplement protocols to lab interpretations and treatment plans.</p>
+          <p>Capture every detail of your functional medicine visitsfrom lifestyle factors and supplement protocols to lab interpretations and treatment plans.</p>
         </div>
         <div class="features">
           <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>60+ minute visit support</span></div>
@@ -166,7 +195,7 @@
       <div class="solution-card">
         <div>
           <h2>time savings</h2>
-          <p>Reduce documentation time by up to 70% so you can focus on what matters most—your patients.</p>
+          <p>Reduce documentation time by up to 70% so you can focus on what matters mostyour patients.</p>
         </div>
         <div class="features">
           <div class="feature-item"><div class="check-dot"><svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Real-time transcription</span></div>
@@ -205,7 +234,7 @@
   <section class="cta-section">
     <h2>Ready to Transform Your Practice?</h2>
     <p>Join functional medicine providers who are saving hours each week</p>
-    <a href="get-started.html"><button class="btn-primary">GET STARTED</button></a>
+    <a href="get-started.html" class="btn-primary">get started</a>
   </section>
 </main>
 
@@ -213,10 +242,10 @@
   <div class="footer-inner">
     <a href="index.html"><img src="assets/logo.png" alt="Integrate Health" /></a>
     <div class="footer-right">
-      <a href="get-started.html"><button class="btn-contact">CONTACT US</button></a>
+      <a href="mailto:hallesutton@integratehealth.ai" class="btn-contact">contact us</a>
       <div class="footer-copy">
         <p>Copyright 2026 Integrate Health, LLC</p>
-        <a href="privacy-policy.html">privacy policy</a>
+        <div class="footer-links"><a href="solutions.html">solutions</a><a href="pricing.html">pricing</a><a href="comparison.html">compare</a><a href="mailto:hallesutton@integratehealth.ai">hallesutton@integratehealth.ai</a><a href="privacy-policy.html">privacy policy</a><a href="terms-of-service.html">terms of service</a></div>
       </div>
     </div>
   </div>
@@ -231,5 +260,6 @@
   closeBtn.addEventListener('click', () => { drawer.classList.remove('open'); overlay.classList.remove('open'); });
   overlay.addEventListener('click', () => { drawer.classList.remove('open'); overlay.classList.remove('open'); });
 </script>
+<script src="assets/site.js" defer></script>
 </body>
 </html>

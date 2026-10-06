@@ -14,7 +14,7 @@
 //
 // Required env vars (Vercel → Project → Settings → Environment Variables):
 //   SMTP_USER   your Google Workspace address, e.g. "hallesutton@integratehealth.ai"
-//   SMTP_PASS   a Google "App Password" (16 chars) — NOT your login password.
+//   SMTP_PASS   a Google "App Password" (16 chars), NOT your login password.
 //               Create at https://myaccount.google.com/apppasswords
 //               (requires 2-Step Verification enabled on the account).
 //   SMTP_HOST   "smtp.gmail.com"
@@ -40,19 +40,19 @@ const FONT_SERIF = "'Petrona', Georgia, 'Times New Roman', serif";
 // ── Per-flow copy ────────────────────────────────────────────────────────
 const FLOWS = {
   buy: {
-    teamSubject: (n, c) => `💳 New customer — ${n}${c ? ` (${c})` : ''}`,
+    teamSubject: (n, c) => `💳 New customer: ${n}${c ? ` (${c})` : ''}`,
     teamLead: 'Someone just completed checkout and is now a customer.',
     custSubject: 'Welcome to Integrate Health 🎉',
     custHeading: "you're all set!",
     custBody:
-      "Thanks for choosing Integrate Health. Your account is being set up now — " +
+      "Thanks for choosing Integrate Health. Your account is being set up now, " +
       "we'll be in touch within 24 hours with your login details so you can start " +
       "saving hours every week. Welcome aboard.",
   },
   sales: {
-    teamSubject: (n, c) => `📞 Sales call request — ${n}${c ? ` (${c})` : ''}`,
+    teamSubject: (n, c) => `📞 Sales call request: ${n}${c ? ` (${c})` : ''}`,
     teamLead: 'Someone requested a call with sales.',
-    custSubject: "You're on the calendar — Integrate Health",
+    custSubject: "You're on the calendar | Integrate Health",
     custHeading: "you're on the calendar!",
     custBody:
       "Thanks for booking time with us. We've got your request and a calendar invite " +
@@ -60,7 +60,7 @@ const FLOWS = {
       "seeing how Integrate can help.",
   },
   demo: {
-    teamSubject: (n, c) => `✉️ Demo request — ${n}${c ? ` (${c})` : ''}`,
+    teamSubject: (n, c) => `✉️ Demo request: ${n}${c ? ` (${c})` : ''}`,
     teamLead: 'Someone requested a demo / overview.',
     custSubject: 'Your Integrate Health demo',
     custHeading: 'your demo is on the way',
@@ -141,6 +141,17 @@ async function sendEmail({ to, subject, html, replyTo }) {
   });
 }
 
+// ── Spam protection ──────────────────────────────────────────────────────
+// Best-effort per-instance rate limit: max 5 submissions per IP per 10 minutes.
+const hits = new Map();
+function rateLimited(ip) {
+  const now = Date.now(), win = 10 * 60 * 1000;
+  const list = (hits.get(ip) || []).filter((t) => now - t < win);
+  list.push(now); hits.set(ip, list);
+  return list.length > 5;
+}
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
 // ── Handler ──────────────────────────────────────────────────────────────
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -152,13 +163,21 @@ module.exports = async (req, res) => {
   try {
     const body = req.body || {};
     const {
-      type, firstName = '', lastName = '', email = '',
-      phone = '', clinic = '', note = '', day = '', time = '',
+      type, firstName = '', lastName = '', email = '', website = '', ts = 0,
+      phone = '', clinic = '', note = '', day = '', time = '', plan = '',
     } = body;
+
+    // Bots: hidden field filled, or form submitted in under 3 seconds. Pretend success.
+    if (website || (ts && Date.now() - Number(ts) < 3000)) return res.status(200).json({ ok: true });
+    const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
+    if (rateLimited(ip)) return res.status(429).json({ error: 'Too many requests. Please try again later.' });
 
     const flow = FLOWS[type];
     if (!flow) return res.status(400).json({ error: 'Unknown form type.' });
-    if (!email) return res.status(400).json({ error: 'Missing email.' });
+    if (!email || !EMAIL_RE.test(email) || email.length > 200) return res.status(400).json({ error: 'Please enter a valid email.' });
+    if ([firstName, lastName, clinic, phone].some((v) => String(v).length > 200) || String(note).length > 2000) {
+      return res.status(400).json({ error: 'Input too long.' });
+    }
 
     if (!process.env.SMTP_USER || !process.env.SMTP_PASS || !process.env.FROM_EMAIL || !process.env.TEAM_INBOX) {
       return res.status(500).json({ error: 'Email is not configured on the server.' });
@@ -176,11 +195,12 @@ module.exports = async (req, res) => {
         ${row('Email', email)}
         ${row('Phone', phone)}
         ${row('Clinic', clinic)}
+        ${row('Plan', plan)}
         ${row('Requested day', day)}
         ${row('Requested time', time)}
         ${row('Note', note)}
       </table>
-      <p style="margin:24px 0 0;font-family:${FONT_SANS};font-size:13px;color:${MUTED};">Just hit reply to respond to ${esc(name)} directly — their address is set as the reply-to.</p>
+      <p style="margin:24px 0 0;font-family:${FONT_SANS};font-size:13px;color:${MUTED};">Just hit reply to respond to ${esc(name)} directly, their address is set as the reply-to.</p>
     `);
 
     // 2) CUSTOMER confirmation -------------------------------------------
@@ -189,7 +209,7 @@ module.exports = async (req, res) => {
       <p style="margin:0 0 18px;font-family:${FONT_SANS};font-size:16px;line-height:1.7;color:${INK};">Hi ${esc(firstName || 'there')},</p>
       <p style="margin:0 0 18px;font-family:${FONT_SANS};font-size:16px;line-height:1.7;color:${INK};">${esc(flow.custBody)}</p>
       ${day || time ? `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 22px;"><tr><td style="border-left:3px solid ${BRAND_CYAN};padding:4px 0 4px 14px;font-family:${FONT_SANS};font-size:15px;color:${INK};"><span style="color:${MUTED};">your time:</span> ${esc([day, time].filter(Boolean).join(' · '))}</td></tr></table>` : ''}
-      <p style="margin:28px 0 0;font-family:${FONT_SERIF};font-style:italic;font-size:16px;color:${MUTED};">— the Integrate Health team</p>
+      <p style="margin:28px 0 0;font-family:${FONT_SERIF};font-style:italic;font-size:16px;color:${MUTED};">the Integrate Health team</p>
     `);
 
     // Send both. Team email first so a lead is never lost even if the

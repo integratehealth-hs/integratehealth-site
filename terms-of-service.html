@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service | Integrate Health</title>
+  <meta name="description" content="The terms and conditions governing your use of Integrate Health's AI clinical documentation software and website." />
+  <link rel="canonical" href="https://integratehealth.ai/terms-of-service" />
+  <meta name="robots" content="index, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&family=Petrona:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue-light: #5DBED8; --blue-dark: #0057B8;
+      --text: #333333; --muted: #666666;
+      --grad: linear-gradient(90deg, #5DBED8 0%, #0057B8 100%);
+      --font-main: 'Karla', sans-serif; --font-serif: 'Petrona', serif;
+    }
+    html { font-family: var(--font-main); font-size: 16px; color: var(--text); scroll-behavior: smooth; }
+    body { background: #fff; }
+    a { color: var(--blue-dark); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { display: block; }
+    .grad-text { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .italic-serif { font-family: var(--font-serif); font-style: italic; }
+
+    /* HEADER */
+    header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 90vw; margin: 0 auto; padding: 4px 24px; }
+    .logo img { height: 90px; }
+    nav.desktop { display: flex; align-items: center; gap: 32px; }
+    nav.desktop a { color: #6b7280; font-size: 15px; transition: color .2s; }
+    nav.desktop a:hover { color: #111; text-decoration: none; }
+    .btn-login { padding: 8px 24px; border-radius: 6px; font-size: 15px; font-weight: 300; background: linear-gradient(white, white) padding-box, var(--grad) border-box; border: 2px solid transparent; cursor: pointer; }
+    .btn-login span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .btn-cta { padding: 8px 24px; border-radius: 6px; font-size: 15px; font-weight: 300; background: var(--grad); color: #fff; border: none; cursor: pointer; transition: opacity .2s; }
+    .btn-cta:hover { opacity: 0.88; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .mobile-drawer { display: none; position: fixed; top: 0; right: 0; width: 260px; height: 100vh; background: #fff; box-shadow: -4px 0 24px rgba(0,0,0,.12); z-index: 200; padding: 24px; flex-direction: column; gap: 24px; transform: translateX(100%); transition: transform .35s cubic-bezier(.25,.8,.25,1); }
+    .mobile-drawer.open { transform: translateX(0); }
+    .drawer-close { align-self: flex-end; background: none; border: none; cursor: pointer; }
+    .mobile-overlay { display: none; position: fixed; inset: 0; z-index: 190; }
+    .mobile-overlay.open { display: block; }
+    .mobile-drawer nav { display: flex; flex-direction: column; gap: 20px; }
+    .mobile-drawer nav a { color: #6b7280; font-size: 16px; }
+
+    /* DOC HERO */
+    .doc-hero { max-width: 820px; margin: 0 auto; padding: 64px 24px 0; }
+    .doc-hero .eyebrow { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--blue-dark); font-weight: 600; margin-bottom: 16px; }
+    .doc-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 400; line-height: 1.12; letter-spacing: -0.01em; }
+    .doc-hero .updated { margin-top: 18px; font-size: 14px; color: var(--muted); }
+
+    /* DOC BODY */
+    .doc { max-width: 820px; margin: 0 auto; padding: 48px 24px 32px; }
+    .doc h2 { font-size: 22px; font-weight: 500; margin: 44px 0 14px; padding-top: 8px; }
+    .doc h2:first-of-type { margin-top: 0; }
+    .doc h3 { font-size: 17px; font-weight: 600; margin: 24px 0 8px; color: var(--text); }
+    .doc p { font-size: 16px; line-height: 1.72; color: #404040; margin-bottom: 14px; }
+    .doc ul { margin: 0 0 16px 0; padding-left: 22px; }
+    .doc li { font-size: 16px; line-height: 1.7; color: #404040; margin-bottom: 8px; }
+    .doc li::marker { color: var(--blue-light); }
+    .doc strong { font-weight: 600; color: var(--text); }
+    .doc .lead { font-size: 17px; color: var(--muted); font-family: var(--font-serif); font-style: italic; line-height: 1.6; }
+
+    /* TOC */
+    .toc { border: 1.5px solid #e5e7eb; border-radius: 14px; padding: 22px 26px; margin-bottom: 8px; }
+    .toc h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; margin: 0 0 14px; padding: 0; }
+    .toc ol { list-style: none; counter-reset: toc; margin: 0; padding: 0; columns: 2; column-gap: 32px; }
+    .toc li { counter-increment: toc; margin-bottom: 9px; font-size: 14.5px; break-inside: avoid; }
+    .toc li::marker { content: none; }
+    .toc a { color: #404040; }
+    .toc a::before { content: counter(toc) ". "; color: var(--blue-light); font-weight: 600; }
+    .toc a:hover { color: var(--blue-dark); text-decoration: none; }
+
+    /* CONTACT BLOCK */
+    .contact-block { margin-top: 16px; border-radius: 14px; padding: 24px 26px; background: #f7f9fc; border: 1px solid #e5e7eb; }
+    .contact-block p { margin-bottom: 6px; }
+
+    /* FOOTER */
+    footer { background: var(--text); color: #fff; padding: 24px 32px; margin-top: 64px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .footer-inner img { height: 110px; filter: brightness(0) invert(1); }
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+    .btn-contact { padding: 12px 32px; border: 2px solid #fff; border-radius: 6px; color: #fff; background: var(--text); font-family: var(--font-main); font-size: 14px; letter-spacing: 0.05em; cursor: pointer; transition: opacity .2s; }
+    .btn-contact:hover { opacity: .8; }
+    .footer-copy { font-size: 13px; text-align: right; color: rgba(255,255,255,.75); }
+    .footer-copy a { color: rgba(255,255,255,.75); }
+    .footer-copy a:hover { opacity: .6; }
+
+    @media (max-width: 860px) {
+      nav.desktop, .header-inner .btn-login, .header-inner .btn-cta { display: none; }
+      .hamburger { display: block; }
+      .mobile-drawer { display: flex; }
+      .toc ol { columns: 1; }
+      .footer-inner { flex-direction: column; align-items: center; gap: 12px; }
+      .footer-right { align-items: center; }
+      .footer-copy { text-align: center; }
+    }
+    /* shared: link-buttons (anchors styled as buttons) */
+    a.btn-cta,a.btn-primary,a.btn-contact,a.btn-card,a.btn-help{display:inline-block;text-decoration:none;text-align:center;box-sizing:border-box}
+    a.btn-card{display:block}
+    nav a.btn-cta,nav a.btn-cta:hover,a.btn-cta,a.btn-primary,a.btn-card.primary,a.btn-help{color:#fff}
+    a.btn-contact,a.btn-contact:hover{color:#fff}
+    .footer-links{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:flex-end}
+    @media (max-width:900px){.footer-links{justify-content:center}}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Integrate Health" /></a>
+    <nav class="desktop">
+      <a href="solutions.html">solutions</a>
+      <a href="pricing.html">pricing</a>
+      <a href="comparison.html">compare</a>
+      <a href="https://app.integratehealth.ai" target="_blank" rel="noopener" class="btn-login"><span>log in</span></a>
+      <a href="get-started.html" class="btn-cta">get started</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+  <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <nav>
+    <a href="solutions.html">solutions</a>
+    <a href="pricing.html">pricing</a>
+    <a href="comparison.html">compare</a>
+    <a href="https://app.integratehealth.ai" target="_blank" rel="noopener">log in</a>
+    <a href="get-started.html" class="btn-cta" style="width:100%">get started</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="doc-hero">
+  <div class="eyebrow">Legal</div>
+  <h1>Terms of <span class="italic-serif grad-text">Service</span></h1>
+  <p class="updated">Last updated: June 8, 2026</p>
+</section>
+
+<main class="doc">
+
+  <p class="lead">These Terms of Service (“Terms”) are a legal agreement between you and Integrate Health, LLC (“Integrate Health,” “we,” “us,” or “our”) governing your access to and use of our website, applications, and AI-assisted clinical documentation services (together, the “Service”). By accessing or using the Service, you agree to be bound by these Terms.</p>
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Table of contents">
+    <h2>On this page</h2>
+    <ol>
+      <li><a href="#acceptance">Acceptance of terms</a></li>
+      <li><a href="#eligibility">Eligibility &amp; accounts</a></li>
+      <li><a href="#service">The Service &amp; clinical disclaimer</a></li>
+      <li><a href="#hipaa">HIPAA &amp; your responsibilities</a></li>
+      <li><a href="#acceptable">Acceptable use</a></li>
+      <li><a href="#fees">Fees, billing &amp; renewal</a></li>
+      <li><a href="#ip">Intellectual property</a></li>
+      <li><a href="#customer-data">Your data &amp; content</a></li>
+      <li><a href="#thirdparty">Third-party services</a></li>
+      <li><a href="#termination">Term &amp; termination</a></li>
+      <li><a href="#warranty">Disclaimer of warranties</a></li>
+      <li><a href="#liability">Limitation of liability</a></li>
+      <li><a href="#indemnity">Indemnification</a></li>
+      <li><a href="#law">Governing law &amp; disputes</a></li>
+      <li><a href="#changes">Changes to these terms</a></li>
+      <li><a href="#contact">Contact us</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="acceptance">1. Acceptance of terms</h2>
+  <p>By creating an account, accessing, or using the Service, you confirm that you have read, understood, and agree to these Terms and our <a href="privacy-policy.html">Privacy Policy</a>. If you are entering into these Terms on behalf of a practice or other organization, you represent that you have authority to bind that entity, and “you” refers to that entity.</p>
+
+  <h2 id="eligibility">2. Eligibility &amp; accounts</h2>
+  <p>You must be a licensed healthcare professional, or acting on behalf of one, and at least the age of majority in your jurisdiction to use the Service. You are responsible for the accuracy of the information you provide, for maintaining the confidentiality of your account credentials, and for all activity that occurs under your account. Notify us promptly of any unauthorized use.</p>
+
+  <h2 id="service">3. The Service &amp; clinical disclaimer</h2>
+  <p>Integrate Health provides AI-assisted tools that help generate clinical documentation such as notes and summaries from your inputs. <strong>The Service is a documentation aid, not a medical device and not a substitute for professional clinical judgment.</strong> AI-generated output may contain errors or omissions. You are solely responsible for reviewing, editing, and approving all documentation before it is relied upon, entered into a medical record, or used for any clinical, billing, or coding purpose.</p>
+
+  <h2 id="hipaa">4. HIPAA &amp; your responsibilities</h2>
+  <p>Where your use of the Service involves protected health information (PHI), we act as your Business Associate under HIPAA, and our handling of PHI is governed by a Business Associate Agreement (BAA) between us. You are responsible, as the covered entity (or its business associate), for obtaining any patient consents or authorizations required by law, for the lawfulness of the data you submit, and for using the Service in compliance with HIPAA and other applicable healthcare and privacy laws.</p>
+
+  <h2 id="acceptable">5. Acceptable use</h2>
+  <p>You agree not to:</p>
+  <ul>
+    <li>Use the Service in violation of any applicable law or regulation.</li>
+    <li>Upload content you do not have the right to submit, or infringe the rights of others.</li>
+    <li>Attempt to access, probe, or disrupt the Service or its security, or reverse-engineer any part of it.</li>
+    <li>Use the Service to develop a competing product, or resell or sublicense it without our written consent.</li>
+    <li>Introduce malware or use the Service to transmit unlawful, harmful, or deceptive material.</li>
+  </ul>
+
+  <h2 id="fees">6. Fees, billing &amp; renewal</h2>
+  <p>Paid plans are billed at the rates and intervals shown at purchase (for example, monthly or annually, per user). Unless otherwise stated, subscriptions renew automatically for successive periods until cancelled, and fees are non-refundable except where required by law. We may change pricing on a prospective basis with reasonable notice. You are responsible for applicable taxes. Custom or project-based engagements are governed by the separate quote or order you accept.</p>
+
+  <h2 id="ip">7. Intellectual property</h2>
+  <p>The Service, including its software, design, and content (excluding your data), is owned by Integrate Health and its licensors and is protected by intellectual property laws. We grant you a limited, non-exclusive, non-transferable right to use the Service during your subscription, subject to these Terms. We retain all rights not expressly granted.</p>
+
+  <h2 id="customer-data">8. Your data &amp; content</h2>
+  <p>You retain all rights to the data and content you submit to the Service (“Customer Data”). You grant us a limited license to process Customer Data solely to provide, secure, and improve the Service, consistent with our <a href="privacy-policy.html">Privacy Policy</a> and your BAA. We may use de-identified or aggregated data that does not identify you or any patient for legitimate business purposes, as permitted by law and your BAA.</p>
+
+  <h2 id="thirdparty">9. Third-party services</h2>
+  <p>The Service may integrate with third-party products you choose to connect, such as EHR systems and payment processors. Those services are governed by their own terms, and we are not responsible for them. Your use of an integration authorizes us to exchange data with that third party as needed to provide the feature.</p>
+
+  <h2 id="termination">10. Term &amp; termination</h2>
+  <p>These Terms apply while you use the Service. You may cancel at any time as described in your account or order. We may suspend or terminate your access if you materially breach these Terms, fail to pay, or use the Service in a way that risks harm or legal liability. Upon termination, your right to use the Service ends, and we will handle Customer Data and PHI as set out in your BAA and our Privacy Policy. Sections that by their nature should survive termination will survive.</p>
+
+  <h2 id="warranty">11. Disclaimer of warranties</h2>
+  <p>The Service is provided <strong>“as is” and “as available”</strong> without warranties of any kind, whether express, implied, or statutory, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that the Service will be uninterrupted, error-free, or that AI-generated output will be accurate or complete.</p>
+
+  <h2 id="liability">12. Limitation of liability</h2>
+  <p>To the maximum extent permitted by law, Integrate Health and its affiliates will not be liable for any indirect, incidental, special, consequential, or punitive damages, or for lost profits, revenues, or data. Our total aggregate liability arising out of or relating to the Service will not exceed the amounts you paid to us for the Service in the twelve (12) months preceding the event giving rise to the claim.</p>
+
+  <h2 id="indemnity">13. Indemnification</h2>
+  <p>You agree to indemnify and hold harmless Integrate Health and its affiliates from claims, damages, and expenses (including reasonable legal fees) arising from your Customer Data, your use of the Service, or your violation of these Terms or applicable law.</p>
+
+  <h2 id="law">14. Governing law &amp; disputes</h2>
+  <p>These Terms are governed by the laws of the State of Missouri, without regard to its conflict-of-laws rules. You agree that the state and federal courts located in Missouri will have exclusive jurisdiction over any dispute arising from these Terms or the Service, except that either party may seek injunctive relief where appropriate.</p>
+
+  <h2 id="changes">15. Changes to these terms</h2>
+  <p>We may update these Terms from time to time. When we make material changes, we will update the “Last updated” date above and, where appropriate, provide additional notice. Your continued use of the Service after the changes take effect constitutes acceptance of the revised Terms.</p>
+
+  <h2 id="contact">16. Contact us</h2>
+  <p>If you have questions about these Terms, please contact us:</p>
+  <div class="contact-block">
+    <p><strong>Integrate Health, LLC</strong></p>
+    <p>Legal: <a href="mailto:legal@integratehealth.ai">legal@integratehealth.ai</a></p>
+    <p>General: <a href="get-started.html">contact form</a></p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html"><img src="assets/logo.png" alt="Integrate Health" /></a>
+    <div class="footer-right">
+      <a href="mailto:hallesutton@integratehealth.ai" class="btn-contact">contact us</a>
+      <div class="footer-copy">
+        <p>Copyright 2026 Integrate Health, LLC</p>
+        <div class="footer-links"><a href="solutions.html">solutions</a><a href="pricing.html">pricing</a><a href="comparison.html">compare</a><a href="mailto:hallesutton@integratehealth.ai">hallesutton@integratehealth.ai</a><a href="privacy-policy.html">privacy policy</a><a href="terms-of-service.html">terms of service</a></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburgerBtn');
+  const overlay   = document.getElementById('mobileOverlay');
+  const drawer    = document.getElementById('mobileDrawer');
+  const closeBtn  = document.getElementById('drawerClose');
+  const openDrawer  = () => { drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeDrawer = () => { drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  hamburger.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+</script>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

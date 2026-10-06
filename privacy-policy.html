@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Integrate Health</title>
+  <meta name="description" content="How Integrate Health collects, uses, protects, and shares information: including our approach to protected health information (PHI) and HIPAA compliance." />
+  <link rel="canonical" href="https://integratehealth.ai/privacy-policy" />
+  <meta name="robots" content="index, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&family=Petrona:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue-light: #5DBED8; --blue-dark: #0057B8;
+      --text: #333333; --muted: #666666;
+      --grad: linear-gradient(90deg, #5DBED8 0%, #0057B8 100%);
+      --font-main: 'Karla', sans-serif; --font-serif: 'Petrona', serif;
+    }
+    html { font-family: var(--font-main); font-size: 16px; color: var(--text); scroll-behavior: smooth; }
+    body { background: #fff; }
+    a { color: var(--blue-dark); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { display: block; }
+    .grad-text { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .italic-serif { font-family: var(--font-serif); font-style: italic; }
+
+    /* HEADER */
+    header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 90vw; margin: 0 auto; padding: 4px 24px; }
+    .logo img { height: 90px; }
+    nav.desktop { display: flex; align-items: center; gap: 32px; }
+    nav.desktop a { color: #6b7280; font-size: 15px; transition: color .2s; }
+    nav.desktop a:hover { color: #111; text-decoration: none; }
+    .btn-login { padding: 8px 24px; border-radius: 6px; font-size: 15px; font-weight: 300; background: linear-gradient(white, white) padding-box, var(--grad) border-box; border: 2px solid transparent; cursor: pointer; }
+    .btn-login span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .btn-cta { padding: 8px 24px; border-radius: 6px; font-size: 15px; font-weight: 300; background: var(--grad); color: #fff; border: none; cursor: pointer; transition: opacity .2s; }
+    .btn-cta:hover { opacity: 0.88; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .mobile-drawer { display: none; position: fixed; top: 0; right: 0; width: 260px; height: 100vh; background: #fff; box-shadow: -4px 0 24px rgba(0,0,0,.12); z-index: 200; padding: 24px; flex-direction: column; gap: 24px; transform: translateX(100%); transition: transform .35s cubic-bezier(.25,.8,.25,1); }
+    .mobile-drawer.open { transform: translateX(0); }
+    .drawer-close { align-self: flex-end; background: none; border: none; cursor: pointer; }
+    .mobile-overlay { display: none; position: fixed; inset: 0; z-index: 190; }
+    .mobile-overlay.open { display: block; }
+    .mobile-drawer nav { display: flex; flex-direction: column; gap: 20px; }
+    .mobile-drawer nav a { color: #6b7280; font-size: 16px; }
+
+    /* DOC HERO */
+    .doc-hero { max-width: 820px; margin: 0 auto; padding: 64px 24px 0; }
+    .doc-hero .eyebrow { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--blue-dark); font-weight: 600; margin-bottom: 16px; }
+    .doc-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 400; line-height: 1.12; letter-spacing: -0.01em; }
+    .doc-hero .updated { margin-top: 18px; font-size: 14px; color: var(--muted); }
+
+    /* DOC BODY */
+    .doc { max-width: 820px; margin: 0 auto; padding: 48px 24px 32px; }
+    .doc h2 { font-size: 22px; font-weight: 500; margin: 44px 0 14px; padding-top: 8px; }
+    .doc h2:first-of-type { margin-top: 0; }
+    .doc h3 { font-size: 17px; font-weight: 600; margin: 24px 0 8px; color: var(--text); }
+    .doc p { font-size: 16px; line-height: 1.72; color: #404040; margin-bottom: 14px; }
+    .doc ul { margin: 0 0 16px 0; padding-left: 22px; }
+    .doc li { font-size: 16px; line-height: 1.7; color: #404040; margin-bottom: 8px; }
+    .doc li::marker { color: var(--blue-light); }
+    .doc strong { font-weight: 600; color: var(--text); }
+    .doc .lead { font-size: 17px; color: var(--muted); font-family: var(--font-serif); font-style: italic; line-height: 1.6; }
+
+    /* TOC */
+    .toc { border: 1.5px solid #e5e7eb; border-radius: 14px; padding: 22px 26px; margin-bottom: 8px; }
+    .toc h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; margin: 0 0 14px; padding: 0; }
+    .toc ol { list-style: none; counter-reset: toc; margin: 0; padding: 0; columns: 2; column-gap: 32px; }
+    .toc li { counter-increment: toc; margin-bottom: 9px; font-size: 14.5px; break-inside: avoid; }
+    .toc li::marker { content: none; }
+    .toc a { color: #404040; }
+    .toc a::before { content: counter(toc) ". "; color: var(--blue-light); font-weight: 600; }
+    .toc a:hover { color: var(--blue-dark); text-decoration: none; }
+
+    /* CONTACT BLOCK */
+    .contact-block { margin-top: 16px; border-radius: 14px; padding: 24px 26px; background: #f7f9fc; border: 1px solid #e5e7eb; }
+    .contact-block p { margin-bottom: 6px; }
+
+    /* FOOTER */
+    footer { background: var(--text); color: #fff; padding: 24px 32px; margin-top: 64px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .footer-inner img { height: 110px; filter: brightness(0) invert(1); }
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+    .btn-contact { padding: 12px 32px; border: 2px solid #fff; border-radius: 6px; color: #fff; background: var(--text); font-family: var(--font-main); font-size: 14px; letter-spacing: 0.05em; cursor: pointer; transition: opacity .2s; }
+    .btn-contact:hover { opacity: .8; }
+    .footer-copy { font-size: 13px; text-align: right; color: rgba(255,255,255,.75); }
+    .footer-copy a { color: rgba(255,255,255,.75); }
+    .footer-copy a:hover { opacity: .6; }
+
+    @media (max-width: 860px) {
+      nav.desktop, .header-inner .btn-login, .header-inner .btn-cta { display: none; }
+      .hamburger { display: block; }
+      .mobile-drawer { display: flex; }
+      .toc ol { columns: 1; }
+      .footer-inner { flex-direction: column; align-items: center; gap: 12px; }
+      .footer-right { align-items: center; }
+      .footer-copy { text-align: center; }
+    }
+    /* shared: link-buttons (anchors styled as buttons) */
+    a.btn-cta,a.btn-primary,a.btn-contact,a.btn-card,a.btn-help{display:inline-block;text-decoration:none;text-align:center;box-sizing:border-box}
+    a.btn-card{display:block}
+    nav a.btn-cta,nav a.btn-cta:hover,a.btn-cta,a.btn-primary,a.btn-card.primary,a.btn-help{color:#fff}
+    a.btn-contact,a.btn-contact:hover{color:#fff}
+    .footer-links{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:flex-end}
+    @media (max-width:900px){.footer-links{justify-content:center}}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt="Integrate Health" /></a>
+    <nav class="desktop">
+      <a href="solutions.html">solutions</a>
+      <a href="pricing.html">pricing</a>
+      <a href="comparison.html">compare</a>
+      <a href="https://app.integratehealth.ai" target="_blank" rel="noopener" class="btn-login"><span>log in</span></a>
+      <a href="get-started.html" class="btn-cta">get started</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+  <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <nav>
+    <a href="solutions.html">solutions</a>
+    <a href="pricing.html">pricing</a>
+    <a href="comparison.html">compare</a>
+    <a href="https://app.integratehealth.ai" target="_blank" rel="noopener">log in</a>
+    <a href="get-started.html" class="btn-cta" style="width:100%">get started</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="doc-hero">
+  <div class="eyebrow">Legal</div>
+  <h1>Privacy <span class="italic-serif grad-text">Policy</span></h1>
+  <p class="updated">Last updated: June 8, 2026</p>
+</section>
+
+<main class="doc">
+
+  <p class="lead">Integrate Health (“Integrate Health,” “we,” “us,” or “our”) provides AI-assisted clinical documentation software for functional, integrative, and holistic medicine practices. This Privacy Policy explains how we collect, use, disclose, and safeguard information when you visit our website or use our services.</p>
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Table of contents">
+    <h2>On this page</h2>
+    <ol>
+      <li><a href="#scope">Scope of this policy</a></li>
+      <li><a href="#collect">Information we collect</a></li>
+      <li><a href="#phi">Protected health information &amp; HIPAA</a></li>
+      <li><a href="#use">How we use information</a></li>
+      <li><a href="#share">How we share information</a></li>
+      <li><a href="#security">Data security</a></li>
+      <li><a href="#retention">Data retention</a></li>
+      <li><a href="#rights">Your choices &amp; rights</a></li>
+      <li><a href="#cookies">Cookies &amp; analytics</a></li>
+      <li><a href="#thirdparty">Third-party services</a></li>
+      <li><a href="#children">Children’s privacy</a></li>
+      <li><a href="#changes">Changes to this policy</a></li>
+      <li><a href="#contact">Contact us</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="scope">1. Scope of this policy</h2>
+  <p>This policy applies to information processed through our marketing website, account sign-up, and the Integrate Health application. It distinguishes between two broad categories of data:</p>
+  <ul>
+    <li><strong>Practice &amp; account data</strong>, information about you and your practice as our customer (for example, your name, email, clinic name, and billing details).</li>
+    <li><strong>Patient data / protected health information (PHI)</strong>, clinical information your practice processes through our service about your patients. We handle PHI as a <strong>Business Associate</strong> under HIPAA, on your behalf and under your direction.</li>
+  </ul>
+
+  <h2 id="collect">2. Information we collect</h2>
+  <h3>Information you provide</h3>
+  <ul>
+    <li>Account and contact details: name, email address, clinic or practice name, role.</li>
+    <li>Billing information: processed by our payment processor; we do not store full card numbers on our servers.</li>
+    <li>Communications: messages you send us through forms, email, or support.</li>
+    <li>Clinical content: audio, transcripts, and notes you create or upload while using the service.</li>
+  </ul>
+  <h3>Information collected automatically</h3>
+  <ul>
+    <li>Device and usage data: IP address, browser type, pages viewed, and interactions, collected to operate and improve the service.</li>
+    <li>Cookies and similar technologies (see <a href="#cookies">Cookies &amp; analytics</a>).</li>
+  </ul>
+
+  <h2 id="phi">3. Protected health information &amp; HIPAA</h2>
+  <p>When your practice uses Integrate Health to process patient information, we act as your <strong>Business Associate</strong> as defined under the Health Insurance Portability and Accountability Act (HIPAA). We will enter into a <strong>Business Associate Agreement (BAA)</strong> with your practice that governs our handling of PHI.</p>
+  <p>We use and disclose PHI only as permitted by your BAA and applicable law, principally to provide, maintain, and support the service. We do not sell PHI, and we do not use PHI for advertising.</p>
+
+  <h2 id="use">4. How we use information</h2>
+  <p>We use information to:</p>
+  <ul>
+    <li>Provide, operate, secure, and improve the service, including generating clinical documentation.</li>
+    <li>Set up and administer your account and process payments.</li>
+    <li>Respond to your requests and provide customer support.</li>
+    <li>Send service-related communications, and, where permitted, relevant product updates.</li>
+    <li>Detect, prevent, and address security incidents, fraud, and misuse.</li>
+    <li>Comply with legal obligations.</li>
+  </ul>
+
+  <h2 id="share">5. How we share information</h2>
+  <p>We do not sell your personal information or PHI. We may share information with:</p>
+  <ul>
+    <li><strong>Service providers / subprocessors</strong> who perform functions on our behalf (for example, cloud hosting and payment processing) under contractual confidentiality and security obligations.</li>
+    <li><strong>Legal &amp; safety</strong> recipients when required by law, regulation, legal process, or to protect rights, safety, and the integrity of the service.</li>
+    <li><strong>Business transfers</strong> in connection with a merger, acquisition, or sale of assets, subject to this policy and your BAA.</li>
+  </ul>
+
+  <h2 id="security">6. Data security</h2>
+  <p>We maintain administrative, technical, and physical safeguards designed to protect information, including encryption of data in transit and at rest, access controls, and monitoring. No method of transmission or storage is completely secure, but we work to protect your information consistent with our HIPAA obligations.</p>
+
+  <h2 id="retention">7. Data retention</h2>
+  <p>We retain information for as long as needed to provide the service, comply with our legal obligations, resolve disputes, and enforce our agreements. PHI is retained and returned or destroyed in accordance with your BAA. You may request export or deletion of account data as described below.</p>
+
+  <h2 id="rights">8. Your choices &amp; rights</h2>
+  <p>Depending on your location, you may have rights to access, correct, delete, or port your personal information, or to object to or restrict certain processing. Because much of the clinical data we process belongs to your practice, requests relating to patient records are generally directed to and fulfilled through your practice as the covered entity. To exercise rights over your own account data, contact us using the details below.</p>
+
+  <h2 id="cookies">9. Cookies &amp; analytics</h2>
+  <p>Our website uses cookies and similar technologies to remember preferences, keep you signed in, and understand how the site is used. You can control cookies through your browser settings; disabling some cookies may affect site functionality. We may use privacy-respecting analytics to measure and improve our website.</p>
+
+  <h2 id="thirdparty">10. Third-party services</h2>
+  <p>The service integrates with third parties you choose to connect, such as electronic health record (EHR) systems and payment processing. Your use of those services is governed by their own terms and privacy policies. We share information with them only as needed to provide the integrations you enable.</p>
+
+  <h2 id="children">11. Children’s privacy</h2>
+  <p>Our website and account services are intended for healthcare professionals and are not directed to children. We do not knowingly collect personal information directly from children through our marketing site. Patient information processed through the service, which may include information about minors, is handled as PHI under your practice’s direction and our BAA.</p>
+
+  <h2 id="changes">12. Changes to this policy</h2>
+  <p>We may update this Privacy Policy from time to time. When we make material changes, we will update the “Last updated” date above and, where appropriate, provide additional notice. Your continued use of the service after changes take effect constitutes acceptance of the revised policy.</p>
+
+  <h2 id="contact">13. Contact us</h2>
+  <p>If you have questions about this Privacy Policy or our data practices, please contact us:</p>
+  <div class="contact-block">
+    <p><strong>Integrate Health, LLC</strong></p>
+    <p>Privacy: <a href="mailto:privacy@integratehealth.ai">privacy@integratehealth.ai</a></p>
+    <p>General: <a href="get-started.html">contact form</a></p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html"><img src="assets/logo.png" alt="Integrate Health" /></a>
+    <div class="footer-right">
+      <a href="mailto:hallesutton@integratehealth.ai" class="btn-contact">contact us</a>
+      <div class="footer-copy">
+        <p>Copyright 2026 Integrate Health, LLC</p>
+        <div class="footer-links"><a href="solutions.html">solutions</a><a href="pricing.html">pricing</a><a href="comparison.html">compare</a><a href="mailto:hallesutton@integratehealth.ai">hallesutton@integratehealth.ai</a><a href="privacy-policy.html">privacy policy</a><a href="terms-of-service.html">terms of service</a></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburgerBtn');
+  const overlay   = document.getElementById('mobileOverlay');
+  const drawer    = document.getElementById('mobileDrawer');
+  const closeBtn  = document.getElementById('drawerClose');
+  const openDrawer  = () => { drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeDrawer = () => { drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  hamburger.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+</script>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

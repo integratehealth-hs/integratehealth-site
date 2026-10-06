@@ -3,7 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pricing – Integrate Health</title>
+  <title>Pricing | AI Scribe for Functional Medicine | Integrate Health</title>
+  <meta name="description" content="Integrate Health pricing: Essential $79/mo, Pro $129/mo, and Practice $399/mo for up to 4 providers. AI documentation and SOAP notes built for functional medicine, with EHR sync on Pro and Practice." />
+  <link rel="canonical" href="https://integratehealth.ai/pricing" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Integrate Health" />
+  <meta property="og:title" content="Pricing | Integrate Health: AI Scribe for Functional Medicine" />
+  <meta property="og:description" content="Essential $79/mo, Pro $129/mo, Practice $399/mo. The AI scribe built for functional and integrative practices. HIPAA compliant." />
+  <meta property="og:url" content="https://integratehealth.ai/pricing" />
+  <meta property="og:image" content="https://integratehealth.ai/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pricing | Integrate Health" />
+  <meta name="twitter:description" content="Essential $79/mo, Pro $129/mo, Practice $399/mo. The AI scribe built for functional medicine." />
+  <meta name="twitter:image" content="https://integratehealth.ai/assets/og-image.png" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Integrate Health","applicationCategory":"HealthApplication","operatingSystem":"Web","url":"https://integratehealth.ai/","description":"AI medical scribe built for functional, integrative, and holistic medicine.","offers":[{"@type":"Offer","name":"Integrate Essential","description":"1 provider, AI documentation, functional-medicine optimized notes, limited custom templates.","price":"79","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"79","priceCurrency":"USD","unitText":"MON"},"url":"https://integratehealth.ai/pricing","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"Integrate Pro","description":"1 provider, unlimited AI documentation, custom templates, EHR sync, priority support.","price":"129","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"129","priceCurrency":"USD","unitText":"MON"},"url":"https://integratehealth.ai/pricing","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"Integrate Practice","description":"Up to 4 providers, practice templates, admin and team tools, EHR sync, priority support.","price":"399","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"399","priceCurrency":"USD","unitText":"MON"},"url":"https://integratehealth.ai/pricing","availability":"https://schema.org/InStock"}]}
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&family=Petrona:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
@@ -52,7 +70,7 @@
     .pricing-header p { font-family: var(--font-serif); font-style: italic; font-size: clamp(16px, 1.8vw, 22px); background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
     /* CARDS */
-    .pricing-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 820px; margin: 0 auto 96px; align-items: start; }
+    .pricing-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; max-width: 1100px; margin: 0 auto 96px; align-items: start; }
     .pricing-card {
       border-radius: 20px; padding: 40px 36px; position: relative;
       transition: box-shadow .3s;
@@ -63,7 +81,9 @@
       border: 2px solid transparent;
       transform: scale(1.04);
     }
-    .pricing-card.coming-soon { border: 1px solid #e5e5e5; opacity: .6; }
+        .pricing-card.services { border: 1.5px solid #e5e5e5; }
+    .pricing-card.services .price-main { font-size: 36px; }
+    .badge.custom { background: var(--text); }
     .badge {
       position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
       padding: 4px 18px; border-radius: 999px; font-size: 13px;
@@ -87,6 +107,8 @@
     .btn-card.primary { background: var(--grad); color: #fff; }
     .btn-card.primary:hover { opacity: .88; transform: scale(1.02); }
     .btn-card.disabled { background: #ccc; color: #fff; cursor: not-allowed; }
+    a.btn-card.waitlist { background: #fff; color: #0057B8; border: 1.5px solid #cfdcec; }
+    a.btn-card.waitlist:hover { border-color: #5DBED8; }
     .feature-list { display: flex; flex-direction: column; gap: 12px; }
     .feature-row { display: flex; align-items: flex-start; gap: 10px; }
     .check { flex-shrink: 0; margin-top: 2px; }
@@ -138,7 +160,44 @@
       .footer-right { align-items: center; }
       .footer-copy { text-align: center; }
     }
+    a.btn-card.outline{background:#fff;color:#0057B8;border:1.5px solid #cfdcec}
+    a.btn-card.outline:hover{border-color:#5DBED8}
+    .fine-print{max-width:1100px;margin:-72px auto 40px;text-align:center;font-size:13px;color:#666}
+    .automate-strip{max-width:1100px;margin:0 auto 96px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:24px;padding:24px 28px;border:1.5px solid #e5e5e5;border-radius:16px}
+    @media (max-width:700px){.automate-strip{grid-template-columns:1fr}}
+    .automate-strip .btn-card{width:auto;margin:0;padding:12px 28px}
+    .automate-title{font-size:17px;font-weight:500;color:#333;margin-bottom:4px}
+    .automate-sub{font-size:14px;color:#666;line-height:1.5;max-width:640px}
+    .th-price{display:block;font-size:13px;font-weight:400;opacity:.85;margin-top:2px}
+    .compare-table td.col-feat{background:#f3f8fd !important}
+    .compare-table .no{display:inline-block;width:14px;height:2px;background:#c8ced6;font-size:0;vertical-align:middle}
+    @media (max-width:900px){.fine-print{margin:-56px auto 32px}.compare-table{display:block;overflow-x:auto}}
+    .founders{max-width:1100px;margin:0 auto 56px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px 32px;padding:28px 32px;border-radius:18px;background:linear-gradient(white,white) padding-box,var(--grad) border-box;border:2px solid transparent;box-shadow:0 12px 36px rgba(0,87,184,.10);position:relative}
+    .founders-tag{position:absolute;top:-14px;left:32px;padding:4px 14px;border-radius:999px;background:var(--grad);color:#fff;font-size:12px;font-weight:600;letter-spacing:.4px}
+    .founders-title{font-size:22px;font-weight:500;color:var(--text);margin-bottom:6px;text-wrap:pretty}
+    .founders-price{color:#0057B8}
+    .founders-sub{font-size:14px;line-height:1.6;color:var(--muted);max-width:640px;text-wrap:pretty}
+    a.btn-card.founders-btn{width:auto;margin:0;padding:14px 30px;white-space:nowrap}
+    @media (max-width:760px){.founders{grid-template-columns:1fr;padding:30px 22px 24px}.founders-tag{left:22px}a.btn-card.founders-btn{width:100%}}
+    .faq{max-width:760px;margin:0 auto 96px;padding:0 24px}
+    .faq h2{font-size:clamp(26px,2.6vw,36px);font-weight:500;color:var(--text);text-align:center;margin-bottom:28px}
+    .faq-list{display:flex;flex-direction:column;gap:12px}
+    .faq details{border:1px solid #e6edf4;border-radius:14px;padding:0 22px;background:#fff}
+    .faq details[open]{border-color:#a9dcea;box-shadow:0 8px 24px rgba(0,60,130,.06)}
+    .faq summary{cursor:pointer;list-style:none;padding:18px 28px 18px 0;font-size:17px;font-weight:500;color:var(--text);position:relative}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq summary::after{content:"+";position:absolute;right:0;top:14px;font-size:24px;font-weight:300;color:#0057B8}
+    .faq details[open] summary::after{content:"\2212"}
+    .faq details p{padding:0 0 20px;font-size:15px;line-height:1.7;color:#555}
+    /* shared: link-buttons (anchors styled as buttons) */
+    a.btn-cta,a.btn-primary,a.btn-contact,a.btn-card,a.btn-help{display:inline-block;text-decoration:none;text-align:center;box-sizing:border-box}
+    a.btn-card{display:block}
+    nav a.btn-cta,nav a.btn-cta:hover,a.btn-cta,a.btn-primary,a.btn-card.primary,a.btn-help{color:#fff}
+    a.btn-contact,a.btn-contact:hover{color:#fff}
+    .footer-links{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:flex-end}
+    @media (max-width:900px){.footer-links{justify-content:center}}
   </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the founders rate?","acceptedAnswer":{"@type":"Answer","text":"For a limited time, the first 100 clinics can get Integrate Pro for $79/mo for their first 12 months. After that it moves to the regular Pro price of $129/mo."}},{"@type":"Question","name":"Which plan is right for me?","acceptedAnswer":{"@type":"Answer","text":"Essential suits providers with a lighter patient load. Pro is for full-time providers and adds unlimited AI documentation, custom templates and EHR sync. Practice covers up to 4 providers and adds practice templates and admin tools."}},{"@type":"Question","name":"Is there annual billing?","acceptedAnswer":{"@type":"Answer","text":"Yes. Annual billing is about 5% less than paying monthly. Choose it at checkout."}},{"@type":"Question","name":"Is Integrate Health HIPAA compliant?","acceptedAnswer":{"@type":"Answer","text":"Yes. Integrate Health is HIPAA compliant and we sign a Business Associate Agreement (BAA) with every practice."}},{"@type":"Question","name":"Do you offer custom automation?","acceptedAnswer":{"@type":"Answer","text":"Yes. Integrate Automate builds custom AI agents for intake, scheduling, follow-ups and billing, priced by quote. Book a call to scope it."}}]}</script>
 </head>
 <body>
 
@@ -148,20 +207,22 @@
     <nav class="desktop">
       <a href="solutions.html">solutions</a>
       <a href="pricing.html" class="active">pricing</a>
+      <a href="comparison.html">compare</a>
       <a href="https://app.integratehealth.ai" target="_blank" class="btn-login"><span>log in</span></a>
-      <a href="get-started.html"><button class="btn-cta">get started</button></a>
+      <a href="get-started.html" class="btn-cta">get started</a>
     </nav>
-    <button class="hamburger" id="hamburgerBtn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   </div>
 </header>
 <div class="mobile-overlay" id="mobileOverlay"></div>
 <div class="mobile-drawer" id="mobileDrawer">
-  <button class="drawer-close" id="drawerClose"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <button class="drawer-close" id="drawerClose" aria-label="Close menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   <nav>
     <a href="solutions.html">solutions</a>
     <a href="pricing.html">pricing</a>
+    <a href="comparison.html">compare</a>
     <a href="https://app.integratehealth.ai" target="_blank">log in</a>
-    <a href="get-started.html"><button class="btn-cta" style="width:100%">get started</button></a>
+    <a href="get-started.html" class="btn-cta" style="width:100%">get started</a>
   </nav>
 </div>
 
@@ -172,45 +233,54 @@
       <p>pricing that scales with your practice</p>
     </div>
 
-    <div class="pricing-cards">
-      <!-- Core -->
-      <div class="pricing-card featured">
-        <div class="badge popular">Most Popular</div>
-        <p class="card-name">Core</p>
-        <p class="card-desc">&nbsp;</p>
-        <div class="price-block">
-          <div class="price-row">
-            <span class="price-main" style="font-weight:200;margin:-30px 0px 0px">$189</span>
-          </div>
-          <p class="price-period">per user/month</p>
-        </div>
-        <a href="get-started.html"><button class="btn-card primary">Get Started</button></a>
-        <div class="feature-list">
-          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Capture full patient visits automatically</span></div>
-          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Auto-generated SOAP notes</span></div>
-          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Handles 30+ minute, in-depth visits</span></div>
-          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Sync notes to your EHR in one click</span></div>
-        </div>
+    <div class="founders">
+      <div class="founders-tag">founders rate · first 100 clinics only</div>
+      <div class="founders-body">
+        <p class="founders-title">get Integrate Pro for <span class="founders-price">$79/mo</span> for your first 12 months</p>
+        <p class="founders-sub">Open to our first 100 clinics only. Everything in Pro, unlimited AI documentation and EHR sync, at the Essential price. After 12 months it moves to $129/mo.</p>
       </div>
+      <a href="checkout.html?plan=pro&amp;offer=founders" class="btn-card primary founders-btn" data-direct>claim founders rate</a>
+    </div>
 
-      <!-- Clinical -->
-      <div class="pricing-card coming-soon">
-        <div class="badge soon">Coming Soon</div>
-        <p class="card-name">Clinical</p>
-        <p class="card-desc">For growing practices</p>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        
+        <p class="card-name">Integrate Essential</p>
+        <p class="card-desc">for the light-use provider</p>
         <div class="price-block">
-          <div class="price-row"><span class="price-main">—</span></div>
+          <div class="price-row"><span class="price-main">$79</span></div>
+          <p class="price-period">per month</p>
         </div>
-        <button class="btn-card disabled" disabled>Coming Soon</button>
-        <div class="feature-list">
-          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Everything in Core</span></div>
-          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Customization for SOAP notes that reflect your clinical thinking</span></div>
-          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Multi-provider support</span></div>
-          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Custom documentation styles</span></div>
-          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Priority processing and faster turnaround</span></div>
-          <div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dedicated account specialist</span></div>
-        </div>
+        <a href="checkout.html?plan=essential" class="btn-card outline" data-direct>get started</a>
+        <div class="feature-list"><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>1 provider</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI documentation</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Functional-medicine optimized notes</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Limited custom templates</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Standard support</span></div></div>
       </div>
+      <div class="pricing-card featured">
+        <div class="badge popular">founders rate</div>
+        <p class="card-name">Integrate Pro</p>
+        <p class="card-desc">for the full-time provider</p>
+        <div class="price-block">
+          <div class="price-row"><span class="price-strike">$129</span><span class="price-main">$79</span></div>
+          <p class="price-period">per month for your first 12 months, then $129</p>
+        </div>
+        <a href="checkout.html?plan=pro&amp;offer=founders" class="btn-card primary" data-direct>claim founders rate</a>
+        <div class="feature-list"><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>1 provider</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Unlimited AI documentation</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Functional-medicine optimized notes</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Custom templates</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>EHR sync</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Priority support</span></div></div>
+      </div>
+      <div class="pricing-card">
+        
+        <p class="card-name">Integrate Practice</p>
+        <p class="card-desc">for the small clinic</p>
+        <div class="price-block">
+          <div class="price-row"><span class="price-main">$399</span></div>
+          <p class="price-period">per month</p>
+        </div>
+        <a href="checkout.html?plan=practice" class="btn-card outline" data-direct>get started</a>
+        <div class="feature-list"><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Up to 4 providers</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Unlimited AI documentation</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Everything in Pro</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Practice templates</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Admin and team tools</span></div><div class="feature-row"><svg class="check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3,10 8,15 17,5" stroke="#5DBED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Priority support</span></div></div>
+      </div>
+    </div>
+    
+    <div class="automate-strip">
+      <div><p class="automate-title">need more than documentation?</p><p class="automate-sub">Integrate Automate: custom AI agents for intake, scheduling, follow-ups and billing, scoped and priced by quote.</p></div>
+      <a href="schedule.html" class="btn-card outline" data-direct>request a quote</a>
     </div>
 
     <!-- Comparison Table -->
@@ -223,8 +293,9 @@
         <thead>
           <tr>
             <th>Features</th>
-            <th>Core</th>
-            <th class="dim">Clinical (Coming Soon)</th>
+            <th>Essential<span class="th-price">$79/mo</span></th>
+            <th class="th-feat">Pro<span class="th-price">$129/mo</span></th>
+            <th>Practice<span class="th-price">$399/mo</span></th>
           </tr>
         </thead>
         <tbody id="compareBody"></tbody>
@@ -233,24 +304,31 @@
 
     <!-- Help -->
     <div class="help-section">
-      <a href="get-started.html">
-        <button class="btn-help">
-          Need help deciding what plan is best for you?&nbsp;
-          <span style="font-family:var(--font-serif);font-style:italic">Set up a time with one of our sales specialists</span>
-        </button>
-      </a>
+      <a href="schedule.html" class="btn-help" data-direct>Need help deciding what plan is best for you?&nbsp;
+          <span style="font-family:var(--font-serif);font-style:italic">Set up a time with one of our sales specialists</span></a>
     </div>
   </div>
 </main>
 
-<footer>
+<section class="faq" id="faq">
+    <h2>pricing questions</h2>
+    <div class="faq-list">
+      <details><summary>What is the founders rate?</summary><p>For a limited time, the first 100 clinics can get Integrate Pro for $79/mo for their first 12 months. After that it moves to the regular Pro price of $129/mo.</p></details>
+      <details><summary>Which plan is right for me?</summary><p>Essential suits providers with a lighter patient load. Pro is for full-time providers and adds unlimited AI documentation, custom templates and EHR sync. Practice covers up to 4 providers and adds practice templates and admin tools.</p></details>
+      <details><summary>Is there annual billing?</summary><p>Yes. Annual billing is about 5% less than paying monthly. Choose it at checkout.</p></details>
+      <details><summary>Is Integrate Health HIPAA compliant?</summary><p>Yes. Integrate Health is HIPAA compliant and we sign a Business Associate Agreement (BAA) with every practice.</p></details>
+      <details><summary>Do you offer custom automation?</summary><p>Yes. Integrate Automate builds custom AI agents for intake, scheduling, follow-ups and billing, priced by quote. Book a call to scope it.</p></details>
+    </div>
+  </section>
+
+  <footer>
   <div class="footer-inner">
     <a href="index.html"><img src="assets/logo.png" alt="Integrate Health" /></a>
     <div class="footer-right">
-      <a href="get-started.html"><button class="btn-contact">CONTACT US</button></a>
+      <a href="mailto:hallesutton@integratehealth.ai" class="btn-contact">contact us</a>
       <div class="footer-copy">
         <p>Copyright 2026 Integrate Health, LLC</p>
-        <a href="privacy-policy.html">privacy policy</a>
+        <div class="footer-links"><a href="solutions.html">solutions</a><a href="pricing.html">pricing</a><a href="comparison.html">compare</a><a href="mailto:hallesutton@integratehealth.ai">hallesutton@integratehealth.ai</a><a href="privacy-policy.html">privacy policy</a><a href="terms-of-service.html">terms of service</a></div>
       </div>
     </div>
   </div>
@@ -267,25 +345,28 @@
   overlay.addEventListener('click', () => { drawer.classList.remove('open'); overlay.classList.remove('open'); });
 
   // Comparison table
-  const features = [
-    { name: 'Capture full patient visits automatically',              core: true,  clinical: true  },
-    { name: 'Auto-generated SOAP notes',                             core: true,  clinical: true  },
-    { name: 'Handles 30+ minute, in-depth visits',                   core: true,  clinical: true  },
-    { name: 'Sync notes to your EHR in one click',                   core: true,  clinical: true  },
-    { name: 'Customization for SOAP notes',                          core: false, clinical: true  },
-    { name: 'Multi-provider support',                                core: false, clinical: true  },
-    { name: 'Custom documentation styles',                           core: false, clinical: true  },
-    { name: 'Priority processing',                                   core: false, clinical: true  },
-    { name: 'Dedicated account specialist',                          core: false, clinical: true  },
+  const Y='__y', N='__n';
+  const rows = [
+    ['Best for', 'Light-use provider', 'Full-time provider', 'Small clinic'],
+    ['Providers', '1', '1', 'Up to 4'],
+    ['AI documentation', Y, 'Unlimited', 'Unlimited'],
+    ['Functional-medicine optimized notes', Y, Y, Y],
+    ['Custom templates', 'Limited', Y, Y],
+    ['EHR sync', N, Y, Y],
+    ['Practice templates', N, N, Y],
+    ['Admin and team tools', N, N, Y],
+    ['Support', 'Standard', 'Priority', 'Priority'],
   ];
-  const checkSvg = (color) => `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="${color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  const crossSvg = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><line x1="5" y1="5" x2="15" y2="15" stroke="#ccc" stroke-width="2" stroke-linecap="round"/><line x1="15" y1="5" x2="5" y2="15" stroke="#ccc" stroke-width="2" stroke-linecap="round"/></svg>`;
+  const yes = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" role="img" aria-label="Included"><polyline points="3,10 8,15 17,5" stroke="#0057B8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const no = '<span class="no" aria-label="Not included">not included</span>';
+  const cell = v => v === Y ? yes : v === N ? no : v;
   const tbody = document.getElementById('compareBody');
-  features.forEach(f => {
+  rows.forEach(r => {
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${f.name}</td><td>${f.core ? checkSvg('#5DBED8') : crossSvg}</td><td style="opacity:.55">${f.clinical ? checkSvg('#0057B8') : crossSvg}</td>`;
+    tr.innerHTML = '<td>' + r[0] + '</td>' + r.slice(1).map((v, i) => '<td' + (i === 1 ? ' class="col-feat"' : '') + '>' + cell(v) + '</td>').join('');
     tbody.appendChild(tr);
   });
 </script>
+<script src="assets/site.js" defer></script>
 </body>
 </html>

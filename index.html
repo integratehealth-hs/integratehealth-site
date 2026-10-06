@@ -3,7 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Integrate Health – AI Scribe for Functional Medicine</title>
+  <title>AI Scribe for Functional Medicine | Integrate Health</title>
+  <meta name="description" content="Integrate Health is the AI medical scribe built for functional, integrative & holistic medicine. Generate accurate SOAP notes in seconds, cut documentation time 70%, and sync with your EHR. HIPAA compliant." />
+  <link rel="canonical" href="https://integratehealth.ai/" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Integrate Health" />
+  <meta property="og:title" content="AI Scribe for Functional Medicine | Integrate Health" />
+  <meta property="og:description" content="The AI medical scribe built for functional & integrative medicine. SOAP notes in seconds, 70% less documentation time, EHR-integrated, HIPAA compliant." />
+  <meta property="og:url" content="https://integratehealth.ai/" />
+  <meta property="og:image" content="https://integratehealth.ai/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Integrate Health: the AI scribe built for functional medicine" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Scribe for Functional Medicine | Integrate Health" />
+  <meta name="twitter:description" content="SOAP notes in seconds. Built for functional, integrative & holistic practitioners. EHR-integrated, HIPAA compliant." />
+  <meta name="twitter:image" content="https://integratehealth.ai/assets/og-image.png" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://integratehealth.ai/#organization",
+        "name": "Integrate Health",
+        "url": "https://integratehealth.ai/",
+        "logo": "https://integratehealth.ai/assets/logo.png",
+        "description": "AI medical scribe built for functional, integrative, and holistic medicine practices."
+      },
+      {
+        "@type": "MedicalBusiness",
+        "@id": "https://integratehealth.ai/#localbusiness",
+        "name": "Integrate Health",
+        "url": "https://integratehealth.ai/",
+        "logo": "https://integratehealth.ai/assets/logo.png",
+        "image": "https://integratehealth.ai/assets/og-image.png",
+        "description": "AI medical scribe for functional, integrative, and holistic medicine practices in Springfield, MO and Northwest Arkansas.",
+        "priceRange": "$$",
+        "areaServed": [
+          { "@type": "City", "name": "Springfield", "containedInPlace": { "@type": "State", "name": "Missouri" } },
+          { "@type": "City", "name": "Nixa", "containedInPlace": { "@type": "State", "name": "Missouri" } },
+          { "@type": "City", "name": "Ozark", "containedInPlace": { "@type": "State", "name": "Missouri" } },
+          { "@type": "City", "name": "Bentonville", "containedInPlace": { "@type": "State", "name": "Arkansas" } },
+          { "@type": "City", "name": "Rogers", "containedInPlace": { "@type": "State", "name": "Arkansas" } },
+          { "@type": "City", "name": "Fayetteville", "containedInPlace": { "@type": "State", "name": "Arkansas" } },
+          { "@type": "City", "name": "Springdale", "containedInPlace": { "@type": "State", "name": "Arkansas" } }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Integrate Health",
+        "operatingSystem": "Web, iOS, Android",
+        "applicationCategory": "HealthApplication",
+        "description": "AI medical scribe for functional medicine. Generates clinically accurate SOAP notes in seconds, reduces documentation time by up to 70%, and integrates with your EHR. HIPAA compliant.",
+        "url": "https://integratehealth.ai/",
+        "image": "https://integratehealth.ai/assets/og-image.png",
+        "offers": { "@type": "AggregateOffer", "lowPrice": "79", "highPrice": "399", "priceCurrency": "USD", "offerCount": "3" },
+        "publisher": { "@id": "https://integratehealth.ai/#organization" }
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&family=Petrona:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
@@ -125,7 +192,7 @@
       background: transparent;
     }
 
-    /* Hero text — flex column, height matches animation */
+    /* Hero text, flex column, height matches animation */
     .hero-text {
       display: flex; flex-direction: column;
       padding-left: clamp(12px, 5vw, 90px);
@@ -145,8 +212,8 @@
     }
     .italic-serif { font-family: var(--font-serif); font-style: italic; }
     .hero-sub {
-      font-family: var(--font-serif); font-style: italic;
-      font-size: clamp(13px, 1.3vw, 18px); color: var(--text); line-height: 1.65;
+      font-family: var(--font-main); font-weight: 400;
+      font-size: clamp(15px, 1.25vw, 18px); color: #4a4f57; line-height: 1.7;
       max-width: 100%;
     }
     .hero-hipaa { width: 140px; margin-top: 16px; margin-bottom: 24px; }
@@ -322,10 +389,41 @@
       position: relative; min-height: 600px;
       border-radius: 12px; overflow: hidden;
     }
-    .demo-desktop img.bg {
-      width: 100%; height: 100%; object-fit: cover;
-      position: absolute; inset: 0;
-    }
+    .demo-desktop { background: linear-gradient(135deg,#eaf6fa 0%,#dbe9f7 100%); border-radius: 20px; min-height: 640px; }
+    .demo-stage { position: absolute; top: 56px; bottom: 56px; left: 48px; right: 460px; }
+    .app-mock { display: grid; grid-template-columns: 30% 1fr; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,60,130,.16); font-family: var(--font-main); color: #222; text-align: left; }
+    .am-desk { position: absolute; inset: 0; transform: perspective(1600px) rotateY(4deg); transform-origin: left center; }
+    .am-side { border-right: 1px solid #eef1f4; padding: 14px 0; overflow: hidden; }
+    .am-logo { height: 22px; margin: 0 14px 14px; display: block; }
+    .am-pt { display: flex; gap: 10px; align-items: flex-start; padding: 7px 14px; font-size: 12px; }
+    .am-pt i { width: 6px; height: 6px; border-radius: 50%; background: #5DBED8; margin-top: 14px; flex-shrink: 0; }
+    .am-pt small { display: block; font-size: 10px; color: #8a929c; }
+    .am-pt.on { background: #f0f8fb; }
+    .am-main { background: #f8fafb; padding: 14px 22px; overflow: hidden; }
+    .am-top { display: flex; justify-content: flex-end; align-items: center; gap: 14px; font-size: 11px; margin-bottom: 10px; }
+    .am-new { background: linear-gradient(90deg,#5DBED8,#2a9fb8); color: #fff; padding: 6px 12px; border-radius: 6px; font-weight: 600; }
+    .am-user { display: flex; align-items: center; gap: 8px; }
+    .am-user b { width: 24px; height: 24px; border-radius: 50%; background: #2a9fb8; color: #fff; font-size: 10px; display: flex; align-items: center; justify-content: center; }
+    .am-name { font-family: var(--font-serif); font-style: italic; font-size: 26px; font-weight: 500; line-height: 1.1; }
+    .am-date { font-size: 11px; color: #777; margin: 4px 0 12px; }
+    .am-steps { display: flex; align-items: center; justify-content: center; }
+    .am-steps span { width: 22px; height: 22px; border-radius: 50%; background: #2a9fb8; color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; }
+    .am-steps span.off { background: #fff; color: #999; border: 1px solid #ddd; }
+    .am-steps em { width: 50px; height: 2px; background: #5DBED8; }
+    .am-steps em.off { background: #e3e6ea; }
+    .am-steplbl { display: flex; justify-content: center; gap: 34px; font-size: 10px; color: #888; margin: 4px 0 12px; }
+    .am-steplbl .cur { color: #2a9fb8; }
+    .am-sec { position: relative; background: #fff; border: 1px solid #a9dcea; border-radius: 9px; padding: 9px 14px; margin-bottom: 7px; font-family: var(--font-serif); font-style: italic; font-size: 14px; }
+    .am-sec i { position: absolute; right: 14px; top: 7px; font-style: normal; color: #888; }
+    .am-plan { font-family: var(--font-main); font-style: normal; font-size: 11px; line-height: 1.6; color: #333; margin-top: 8px; }
+    .am-chip { position: absolute; background: #fff; border-radius: 12px; box-shadow: 0 12px 30px rgba(0,60,130,.16); font-size: 13px; color: #444; display: flex; align-items: center; gap: 8px; padding: 10px 14px; z-index: 2; }
+    .am-chip b { font-size: 18px; color: #0057B8; font-weight: 600; }
+    .am-chip-a { top: -18px; right: 40px; }
+    .am-chip-b { bottom: -16px; left: 40%; }
+    .am-mob { margin-bottom: 20px; grid-template-columns: 1fr; box-shadow: 0 10px 28px rgba(0,60,130,.12); }
+    .am-mob .am-side, .am-mob .am-top { display: none; }
+    .am-mob .am-main { padding: 14px 16px; }
+    @media (max-width: 1180px) { .demo-stage { right: 440px; left: 32px; } .am-side { display: none; } .app-mock.am-desk { grid-template-columns: 1fr; } }
     .demo-overlay-card {
       position: absolute; top: 48px; bottom: 48px; right: 40px;
       background: #fff; border-radius: 20px;
@@ -516,8 +614,68 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; line-height: 1.3;
     }
-    .demo-mobile img { width: 100%; border-radius: 14px; margin-bottom: 20px; object-fit: cover; max-height: 200px; }
+    
+    .hipaa-badge{display:inline-flex;align-self:flex-start;width:max-content;align-items:center;gap:8px;margin:20px 0 24px;padding:8px 14px;border:1px solid #d6e4f3;border-radius:999px;background:#f5f9fd;font-size:13px;font-weight:500;color:#0057B8;letter-spacing:.2px}
+    .hipaa-sep{width:3px;height:3px;border-radius:50%;background:#5DBED8}
+    .pf-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+    .pf-item{padding:26px 24px;border:1px solid #e6edf4;border-radius:16px;background:#fff;transition:box-shadow .25s,transform .25s}
+    .pf-item:hover{box-shadow:0 12px 32px rgba(0,87,184,.10);transform:translateY(-2px)}
+    .pf-num{display:block;font-size:13px;font-weight:600;letter-spacing:.6px;color:#5DBED8;margin-bottom:14px}
+    .pf-item h3{font-size:19px;font-weight:500;color:var(--text);margin-bottom:6px}
+    .pf-item p{font-size:15px;line-height:1.6;color:#555}
+    .practice-inner{align-items:center}
+    .practice-tag-inner{margin-left:0;max-width:440px}
+    .hiw{padding:88px 24px 72px;background:linear-gradient(180deg,#fff 0%,#f4f8fc 100%)}
+    .hiw-inner{max-width:1180px;margin:0 auto}
+    .hiw-head{text-align:center;max-width:620px;margin:0 auto 48px}
+    .hiw-eyebrow{font-size:13px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#5DBED8;margin-bottom:10px}
+    .hiw-head h2{font-size:clamp(30px,3.4vw,46px);font-weight:500;color:var(--text);line-height:1.15;margin-bottom:12px}
+    .hiw-lede{font-size:17px;line-height:1.6;color:#555}
+    .hiw-steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;counter-reset:none}
+    .hiw-step{background:#fff;border:1px solid #e6edf4;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:20px;box-shadow:0 8px 28px rgba(0,60,130,.06);transition:transform .25s,box-shadow .25s}
+    .hiw-step:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,60,130,.12)}
+    .hiw-ui{height:150px;border-radius:14px;background:linear-gradient(135deg,#eaf6fa,#dbe9f7);padding:18px;display:flex;flex-direction:column;justify-content:center;gap:14px}
+    .hiw-rec{align-self:flex-start;display:flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:6px 12px;font-size:12px;color:#555;box-shadow:0 4px 12px rgba(0,60,130,.08)}
+    .hiw-rec b{color:#0057B8;font-weight:600}
+    .hiw-dot{width:8px;height:8px;border-radius:50%;background:#e5484d;animation:hiw-pulse 1.4s infinite}
+    @keyframes hiw-pulse{50%{opacity:.3}}
+    .hiw-wave{display:flex;align-items:center;gap:4px;height:40px}
+    .hiw-wave i{flex:1;max-width:8px;border-radius:4px;background:linear-gradient(180deg,#5DBED8,#0057B8)}
+    .hiw-soap{display:flex;flex-wrap:wrap;gap:6px}
+    .hiw-soap span{font-family:var(--font-serif);font-style:italic;font-size:13px;background:#fff;border:1px solid #a9dcea;border-radius:8px;padding:4px 10px;color:#333}
+    .hiw-soap span.on{background:#0057B8;border-color:#0057B8;color:#fff}
+    .hiw-lines{background:#fff;border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:7px}
+    .hiw-lines i{height:6px;border-radius:3px;background:#e3ebf3}
+    .hiw-sync{display:flex;align-items:center;gap:12px;background:#fff;border-radius:12px;padding:12px 14px;box-shadow:0 4px 12px rgba(0,60,130,.08)}
+    .hiw-check{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#5DBED8,#0057B8);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .hiw-sync b{display:block;font-size:14px;font-weight:600;color:#333}
+    .hiw-sync small{font-size:12px;color:#777}
+    .hiw-btn{align-self:flex-end;font-size:12px;font-weight:600;color:#fff;background:linear-gradient(90deg,#5DBED8,#2a9fb8);border-radius:8px;padding:7px 14px}
+    .hiw-copy{display:flex;gap:14px;padding:0 6px 8px}
+    .hiw-n{width:30px;height:30px;border-radius:50%;border:1.5px solid #cfe3f0;color:#0057B8;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .hiw-copy h3{font-size:20px;font-weight:500;color:var(--text);margin-bottom:4px}
+    .hiw-copy p{font-size:15px;line-height:1.6;color:#555}
+    .faq{padding:88px 24px;background:#fff}
+    .faq-inner{max-width:760px;margin:0 auto}
+    .faq h2{font-size:clamp(28px,3vw,40px);font-weight:500;color:var(--text);text-align:center;margin-bottom:36px}
+    .faq-list{display:flex;flex-direction:column;gap:12px}
+    .faq details{border:1px solid #e6edf4;border-radius:14px;padding:0 22px;background:#fff;transition:border-color .2s}
+    .faq details[open]{border-color:#a9dcea;box-shadow:0 8px 24px rgba(0,60,130,.06)}
+    .faq summary{cursor:pointer;list-style:none;padding:18px 28px 18px 0;font-size:17px;font-weight:500;color:var(--text);position:relative}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq summary::after{content:"+";position:absolute;right:0;top:14px;font-size:24px;font-weight:300;color:#0057B8}
+    .faq details[open] summary::after{content:"\2212"}
+    .faq details p{padding:0 0 20px;font-size:15px;line-height:1.7;color:#555}
+    @media (max-width:900px){.pf-grid{grid-template-columns:1fr}.hiw-steps{grid-template-columns:1fr}.hiw{padding:56px 20px 48px}.faq{padding:56px 20px}}
+    /* shared: link-buttons (anchors styled as buttons) */
+    a.btn-cta,a.btn-primary,a.btn-contact,a.btn-card,a.btn-help{display:inline-block;text-decoration:none;text-align:center;box-sizing:border-box}
+    a.btn-card{display:block}
+    nav a.btn-cta,nav a.btn-cta:hover,a.btn-cta,a.btn-primary,a.btn-card.primary,a.btn-help{color:#fff}
+    a.btn-contact,a.btn-contact:hover{color:#fff}
+    .footer-links{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:flex-end}
+    @media (max-width:900px){.footer-links{justify-content:center}}
   </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Integrate Health?","acceptedAnswer":{"@type":"Answer","text":"Integrate Health is an AI medical scribe built for functional, integrative and holistic medicine. It captures your visit, writes a structured SOAP note in seconds and syncs it to your EHR."}},{"@type":"Question","name":"Is Integrate Health HIPAA compliant?","acceptedAnswer":{"@type":"Answer","text":"Yes. Integrate Health is HIPAA compliant and we sign a Business Associate Agreement (BAA) with every practice."}},{"@type":"Question","name":"Does it work with my EHR?","acceptedAnswer":{"@type":"Answer","text":"EHR sync is included on the Pro and Practice plans, so notes go to your EHR in one click. Book a quick call and we will confirm your specific EHR."}},{"@type":"Question","name":"Can it handle long, in-depth visits?","acceptedAnswer":{"@type":"Answer","text":"Yes. Integrate is designed for 30+ minute functional medicine visits and keeps the detail, including full histories, supplements, protocols and care plans."}},{"@type":"Question","name":"Can I customize how my notes are written?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pro and Practice include custom templates so notes match your documentation style. Essential includes a limited set of templates."}},{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"Essential is $79/mo, Pro is $129/mo and Practice is $399/mo for up to 4 providers. For a limited time, the first 100 clinics can get Pro for $79/mo for their first 12 months."}}]}</script>
 </head>
 <body>
 
@@ -530,8 +688,9 @@
     <nav class="desktop">
       <a href="solutions.html">solutions</a>
       <a href="pricing.html">pricing</a>
+      <a href="comparison.html">compare</a>
       <a href="https://app.integratehealth.ai" target="_blank" rel="noopener" class="btn-login"><span>log in</span></a>
-      <a href="get-started.html"><button class="btn-cta">get started</button></a>
+      <a href="get-started.html" class="btn-cta">get started</a>
     </nav>
     <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round">
@@ -552,8 +711,9 @@
   <nav>
     <a href="solutions.html">solutions</a>
     <a href="pricing.html">pricing</a>
+    <a href="comparison.html">compare</a>
     <a href="https://app.integratehealth.ai" target="_blank" rel="noopener">log in</a>
-    <a href="get-started.html"><button class="btn-cta" style="width:100%">get started</button></a>
+    <a href="get-started.html" class="btn-cta" style="width:100%">get started</a>
   </nav>
 </div>
 
@@ -571,7 +731,7 @@
       <p class="hero-sub">
         purpose-built for functional, integrative, and holistic practitioners, Integrate Health captures the full patient story and supports the way you actually practice. Designed for clinics like yours where visits are longer, care is personalized, and details actually matter.
       </p>
-      <img src="assets/hipaa.png" alt="HIPAA Compliant" class="hero-hipaa" />
+      <div class="hipaa-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0057B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><polyline points="8.5,12 11,14.5 15.5,9.5"/></svg><span>HIPAA compliant</span><span class="hipaa-sep"></span><span>BAA available</span></div>
     </div>
 
     <!-- Animation iframe -->
@@ -587,32 +747,65 @@
 </section>
 
 <!-- DEMO SECTION -->
-<a href="get-started.html" class="mobile-cta-between">
-  <button class="btn-cta" style="width:100%;">Get Started</button>
-</a>
+<div class="mobile-cta-between"><a href="get-started.html" class="btn-cta" style="width:100%;">get started</a></div>
 <section class="demo-section">
   <div class="demo-inner">
     <!-- Mobile -->
     <div class="demo-mobile">
       <h2 class="demo-card-title" style="-webkit-text-fill-color:unset;background:none;color:#0057B8;font-size:22px;">How much is your time worth?</h2>
-      <img src="assets/doctor.png" alt="Doctor" />
-      <p class="demo-card-sub">If you're spending hours each week on notes, the cost adds up quickly. Not just in time — but in missed opportunity.</p>
+      <div class="app-mock am-mob" role="img" aria-label="Integrate Health app showing a finished SOAP note with a supplement plan">
+        <div class="am-side">
+          <img src="assets/logo.png" alt="" class="am-logo" />
+          <div class="am-pt"><i></i><span><small>10/5/2026</small>Clara Whitfield</span></div><div class="am-pt"><i></i><span><small>10/5/2026</small>Marcus Bell</span></div><div class="am-pt on"><i></i><span><small>10/1/2026</small>Elena Ruiz</span></div><div class="am-pt"><i></i><span><small>10/1/2026</small>Theo Langford</span></div><div class="am-pt"><i></i><span><small>9/24/2026</small>Priya Nandi</span></div><div class="am-pt"><i></i><span><small>9/24/2026</small>Owen Castillo</span></div><div class="am-pt"><i></i><span><small>9/24/2026</small>Grace Holloway</span></div>
+        </div>
+        <div class="am-main">
+          <div class="am-top"><span class="am-new">start new session</span><span class="am-user">Dr. Maya Chen<b>MC</b></span></div>
+          <p class="am-name">Elena Ruiz</p>
+          <p class="am-date">Oct 1, 2026 · 2:03 PM</p>
+          <div class="am-steps"><span class="done">✓</span><em></em><span class="cur">2</span><em class="off"></em><span class="off">3</span></div>
+          <div class="am-steplbl"><span>speak</span><span class="cur">summarize</span><span>sync</span></div>
+          <div class="am-sec">Subjective<i>›</i></div>
+          <div class="am-sec">Objective<i>›</i></div>
+          <div class="am-sec">Assessment<i>›</i></div>
+          <div class="am-sec open">Plan<i>⌄</i>
+            <div class="am-plan"><p>Continuing Supplements:</p><p>• Magnesium glycinate 1 capsule nightly</p><p>• Omega-3 fish oil 1 capsule daily</p><p>• Vitamin D3/K2 5,000 IU daily with food</p><p>• Probiotic 1 capsule each morning</p></div>
+          </div>
+        </div>
+      </div>
+      <p class="demo-card-sub">If you're spending hours each week on notes, the cost adds up quickly. Not just in time, but in missed opportunity.</p>
       <div class="demo-benefits" style="margin-top:12px">
         <div class="demo-benefit"><div class="demo-benefit-dot"></div><div><strong>Hours back every week</strong><span>Eliminate after-hours charting</span></div></div>
         <div class="demo-benefit"><div class="demo-benefit-dot"></div><div><strong>More patients, without longer days</strong><span>Free up space without sacrificing quality</span></div></div>
         <div class="demo-benefit"><div class="demo-benefit-dot"></div><div><strong>Increased revenue per week</strong><span>Turn saved time into additional visits</span></div></div>
       </div>
-      <a href="get-started.html" style="display:block; margin-top:20px;">
-        <button class="btn-primary" style="width:100%;">Watch a 2-minute demo</button>
-      </a>
+      <a href="get-started.html" class="btn-primary" style="display:block; margin-top:20px;width:100%;">get a demo</a>
     </div>
 
     <!-- Desktop -->
     <div class="demo-desktop">
-      <img src="assets/doctor.png" alt="Doctor" class="bg" />
+      <div class="demo-stage"><div class="app-mock am-desk" role="img" aria-label="Integrate Health app showing a finished SOAP note with a supplement plan">
+        <div class="am-side">
+          <img src="assets/logo.png" alt="" class="am-logo" />
+          <div class="am-pt"><i></i><span><small>10/5/2026</small>Clara Whitfield</span></div><div class="am-pt"><i></i><span><small>10/5/2026</small>Marcus Bell</span></div><div class="am-pt on"><i></i><span><small>10/1/2026</small>Elena Ruiz</span></div><div class="am-pt"><i></i><span><small>10/1/2026</small>Theo Langford</span></div><div class="am-pt"><i></i><span><small>9/24/2026</small>Priya Nandi</span></div><div class="am-pt"><i></i><span><small>9/24/2026</small>Owen Castillo</span></div><div class="am-pt"><i></i><span><small>9/24/2026</small>Grace Holloway</span></div>
+        </div>
+        <div class="am-main">
+          <div class="am-top"><span class="am-new">start new session</span><span class="am-user">Dr. Maya Chen<b>MC</b></span></div>
+          <p class="am-name">Elena Ruiz</p>
+          <p class="am-date">Oct 1, 2026 · 2:03 PM</p>
+          <div class="am-steps"><span class="done">✓</span><em></em><span class="cur">2</span><em class="off"></em><span class="off">3</span></div>
+          <div class="am-steplbl"><span>speak</span><span class="cur">summarize</span><span>sync</span></div>
+          <div class="am-sec">Subjective<i>›</i></div>
+          <div class="am-sec">Objective<i>›</i></div>
+          <div class="am-sec">Assessment<i>›</i></div>
+          <div class="am-sec open">Plan<i>⌄</i>
+            <div class="am-plan"><p>Continuing Supplements:</p><p>• Magnesium glycinate 1 capsule nightly</p><p>• Omega-3 fish oil 1 capsule daily</p><p>• Vitamin D3/K2 5,000 IU daily with food</p><p>• Probiotic 1 capsule each morning</p></div>
+          </div>
+        </div>
+      </div><div class="am-chip am-chip-a"><b>52 sec</b>from visit to finished note</div>
+      <div class="am-chip am-chip-b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0057B8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5,12 10,17 19,7"/></svg>supplement plan captured</div></div>
       <div class="demo-overlay-card" style="text-align:center;font-weight:300">
         <h2 class="demo-card-title" style="font-size:25px;text-align:left">How much is your time worth?</h2>
-        <p class="demo-card-sub" style="font-size:15px;text-align:left">If you're spending hours each week on notes, the cost adds up quickly. Not just in time — but in missed opportunity.</p>
+        <p class="demo-card-sub" style="font-size:15px;text-align:left">If you're spending hours each week on notes, the cost adds up quickly. Not just in time, but in missed opportunity.</p>
         <div class="demo-benefits">
           <div class="demo-benefit">
             <div class="demo-benefit-dot"></div>
@@ -645,9 +838,7 @@
             </div>
           </div>
         </div>
-        <a href="get-started.html" style="display: block;">
-          <button class="btn-primary" style="width:100%; margin-bottom: 10px;">Watch a 2-minute demo</button>
-        </a>
+        <a href="get-started.html" class="btn-primary" style="display: block;width:100%; margin-bottom: 10px;">get a demo</a>
         <p class="demo-card-intro" style="font-family: Karla; font-weight: 400;">FIND OUT HOW MUCH TIME AND REVENUE<br/>YOU COULD BE RECLAIMING.</p>
       </div>
     </div>
@@ -663,19 +854,12 @@
       <h2 class="italic-serif grad-text">they have a time and profit problem.</h2>
     </div>
 
-    <!-- Subhead -->
-    <p class="time-sub" style="padding: 0px; margin: -20px 0px 40px;">
-    </p>
-
-    <!-- Intro -->
-    <p class="time-intro" style="text-align: left;"></p>
-
     <!-- 3 Cards -->
     <div class="time-cards">
       <div class="time-card">
         <div class="time-card-bar"></div>
         <h3>Burnout from notes that follow you home</h3>
-        <p>Finish every visit with a complete, structured note — no lunch break or after-hours charting.</p>
+        <p>Finish every visit with a complete, structured note, no lunch break or after-hours charting.</p>
       </div>
       <div class="time-card">
         <div class="time-card-bar"></div>
@@ -701,73 +885,36 @@
       </div>
     </div>
 
-    <div class="steps" id="stepsContainer">
-      <div class="step">
-        <div class="step-connector">
-          <div class="step-dot" data-step="0"></div>
-          <div class="step-line" data-line="0"></div>
-        </div>
-        <div class="step-text">handles 30+ minute patient visits<br />without losing detail</div>
-      </div>
-      <div class="step">
-        <div class="step-connector">
-          <div class="step-dot" data-step="1"></div>
-          <div class="step-line" data-line="1"></div>
-        </div>
-        <div class="step-text">understands functional medicine,<br />supplements, and care plans</div>
-      </div>
-      <div class="step">
-        <div class="step-connector">
-          <div class="step-dot" data-step="2"></div>
-          <div class="step-line" data-line="2"></div>
-        </div>
-        <div class="step-text">captures full patient histories,<br />not just quick symptoms</div>
-      </div>
-      <div class="step">
-        <div class="step-connector">
-          <div class="step-dot" data-step="3"></div>
-        </div>
-        <div class="step-text">customizable outputs to match<br />your documentation style</div>
-      </div>
+    <div class="pf-grid">
+      <div class="pf-item"><span class="pf-num">01</span><h3>30+ minute visits</h3><p>Handles long, in-depth appointments without losing detail.</p></div>
+      <div class="pf-item"><span class="pf-num">02</span><h3>functional medicine fluent</h3><p>Understands supplements, protocols, labs and care plans.</p></div>
+      <div class="pf-item"><span class="pf-num">03</span><h3>full patient histories</h3><p>Captures the whole story, not just quick symptoms.</p></div>
+      <div class="pf-item"><span class="pf-num">04</span><h3>your documentation style</h3><p>Customizable outputs that match how you write notes.</p></div>
     </div>
   </div>
 </section>
-<!-- CARDS SECTION -->
-<section class="cards-section">
-  <div class="cards-inner">
-    <div class="cards-layout">
-      <div class="cards-heading">
-        <h2>soap notes in<br />seconds</h2>
-        <span class="step-label">three easy steps</span>
-        <p>AI-powered documentation designed for integrative, whole-person care. Capture, structure, and sync your visits in seconds.</p>
-      </div>
-
-      <div class="cards-row">
-        <!-- Card 1: Speak -->
-        <div class="card card-1" style="background-image:url('assets/card-bg.png')">
-          <div class="card-icon">
-            <svg width="64" height="64" viewBox="0 0 60 60" fill="none"><rect x="15" y="10" width="8" height="30" rx="4" fill="white"/><rect x="26" y="5" width="8" height="40" rx="4" fill="white"/><rect x="37" y="15" width="8" height="20" rx="4" fill="white"/></svg>
-          </div>
-          <p><strong>speak</strong><span>and we'll capture<br />your visit seamlessly</span></p>
-        </div>
-
-        <!-- Card 2: Summarize -->
-        <div class="card card-2">
-          <div class="card-icon card-icon-inner" style="background-image:url('assets/card-bg.png')">
-            <svg width="64" height="64" viewBox="0 0 60 60" fill="none"><rect x="15" y="10" width="30" height="40" rx="2" fill="white"/><line x1="20" y1="20" x2="40" y2="20" stroke="#60B7D6" stroke-width="2"/><line x1="20" y1="27" x2="40" y2="27" stroke="#60B7D6" stroke-width="2"/><line x1="20" y1="34" x2="35" y2="34" stroke="#60B7D6" stroke-width="2"/></svg>
-          </div>
-          <p><strong>summarize</strong><span>visits into structured<br />soap notes with AI</span></p>
-        </div>
-
-        <!-- Card 3: Sync -->
-        <div class="card card-3" style="background-image:url('assets/card-bg.png')">
-          <div class="card-icon">
-            <svg width="64" height="64" viewBox="0 0 60 60" fill="none"><path d="M15 15L15 45L30 35L35 45L40 43L35 33L48 33L15 15Z" fill="white"/></svg>
-          </div>
-          <p><strong>sync</strong><span>notes to your EHR<br />with one click</span></p>
-        </div>
-      </div>
+<!-- HOW IT WORKS -->
+<section class="hiw">
+  <div class="hiw-inner">
+    <div class="hiw-head">
+      <p class="hiw-eyebrow">three easy steps</p>
+      <h2>soap notes in <span class="italic-serif grad-text">seconds</span></h2>
+      <p class="hiw-lede">AI-powered documentation designed for integrative, whole-person care.</p>
     </div>
+    <ol class="hiw-steps">
+      <li class="hiw-step">
+        <div class="hiw-ui"><div class="hiw-rec"><span class="hiw-dot"></span>recording<b>32:14</b></div><div class="hiw-wave"><i style="height:10px"></i><i style="height:22px"></i><i style="height:14px"></i><i style="height:30px"></i><i style="height:18px"></i><i style="height:26px"></i><i style="height:12px"></i><i style="height:34px"></i><i style="height:20px"></i><i style="height:28px"></i><i style="height:16px"></i><i style="height:24px"></i><i style="height:10px"></i><i style="height:30px"></i><i style="height:18px"></i></div></div>
+        <div class="hiw-copy"><span class="hiw-n">1</span><div><h3>speak</h3><p>Run your visit as usual. Integrate captures the full conversation in the background.</p></div></div>
+      </li>
+      <li class="hiw-step">
+        <div class="hiw-ui"><div class="hiw-soap"><span>Subjective</span><span>Objective</span><span>Assessment</span><span class="on">Plan</span></div><div class="hiw-lines"><i style="width:92%"></i><i style="width:78%"></i><i style="width:85%"></i></div></div>
+        <div class="hiw-copy"><span class="hiw-n">2</span><div><h3>summarize</h3><p>A structured SOAP note, supplements and care plan included, ready in seconds.</p></div></div>
+      </li>
+      <li class="hiw-step">
+        <div class="hiw-ui"><div class="hiw-sync"><span class="hiw-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5,12 10,17 19,7"/></svg></span><div><b>synced to EHR</b><small>Elena Ruiz · Oct 1, 2026</small></div></div><div class="hiw-btn">sync note</div></div>
+        <div class="hiw-copy"><span class="hiw-n">3</span><div><h3>sync</h3><p>Review, then send the note to your EHR with one click.</p></div></div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -789,9 +936,24 @@
       </div>
     </div>
     <div class="dots">
-      <button class="dot active" data-idx="0"></button>
-      <button class="dot" data-idx="1"></button>
-      <button class="dot" data-idx="2"></button>
+      <button class="dot active" data-idx="0" aria-label="Show testimonial 1"></button>
+      <button class="dot" data-idx="1" aria-label="Show testimonial 2"></button>
+      <button class="dot" data-idx="2" aria-label="Show testimonial 3"></button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <h2>questions, <span class="italic-serif grad-text">answered</span></h2>
+    <div class="faq-list">
+      <details><summary>What is Integrate Health?</summary><p>Integrate Health is an AI medical scribe built for functional, integrative and holistic medicine. It captures your visit, writes a structured SOAP note in seconds and syncs it to your EHR.</p></details>
+      <details><summary>Is Integrate Health HIPAA compliant?</summary><p>Yes. Integrate Health is HIPAA compliant and we sign a Business Associate Agreement (BAA) with every practice.</p></details>
+      <details><summary>Does it work with my EHR?</summary><p>EHR sync is included on the Pro and Practice plans, so notes go to your EHR in one click. Book a quick call and we will confirm your specific EHR.</p></details>
+      <details><summary>Can it handle long, in-depth visits?</summary><p>Yes. Integrate is designed for 30+ minute functional medicine visits and keeps the detail, including full histories, supplements, protocols and care plans.</p></details>
+      <details><summary>Can I customize how my notes are written?</summary><p>Yes. Pro and Practice include custom templates so notes match your documentation style. Essential includes a limited set of templates.</p></details>
+      <details><summary>How much does it cost?</summary><p>Essential is $79/mo, Pro is $129/mo and Practice is $399/mo for up to 4 providers. For a limited time, the first 100 clinics can get Pro for $79/mo for their first 12 months.</p></details>
     </div>
   </div>
 </section>
@@ -801,10 +963,10 @@
   <div class="footer-inner">
     <a href="index.html"><img src="assets/logo.png" alt="Integrate Health" /></a>
     <div class="footer-right">
-      <a href="get-started.html"><button class="btn-contact">CONTACT US</button></a>
+      <a href="mailto:hallesutton@integratehealth.ai" class="btn-contact">contact us</a>
       <div class="footer-copy">
         <p>Copyright 2026 Integrate Health, LLC</p>
-        <a href="privacy-policy.html">privacy policy</a>
+        <div class="footer-links"><a href="solutions.html">solutions</a><a href="pricing.html">pricing</a><a href="comparison.html">compare</a><a href="mailto:hallesutton@integratehealth.ai">hallesutton@integratehealth.ai</a><a href="privacy-policy.html">privacy policy</a><a href="terms-of-service.html">terms of service</a></div>
       </div>
     </div>
   </div>
@@ -836,114 +998,8 @@
   dots.forEach(d => d.addEventListener('click', () => goToTestimonial(+d.dataset.idx)));
   setInterval(() => goToTestimonial((tIdx + 1) % testimonialItems.length), 5000);
 
-  // ── Practice steps animation ──
-  const stepDots  = document.querySelectorAll('.step-dot');
-  const stepLines = document.querySelectorAll('.step-line');
-  let stepsStarted = false;
-
-  const stepsObserver = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting && !stepsStarted) {
-      stepsStarted = true;
-      [0,1,2,3].forEach(i => {
-        setTimeout(() => {
-          if (stepDots[i]) stepDots[i].classList.add('visible');
-          if (stepLines[i]) stepLines[i].classList.add('visible');
-        }, i * 800);
-      });
-    }
-  }, { threshold: 0.3 });
-  stepsObserver.observe(document.getElementById('stepsContainer'));
 </script>
 
-<!-- GET STARTED MODAL -->
-<div id="gs-modal-overlay" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); align-items:center; justify-content:center; padding:24px;">
-  <div id="gs-modal" style="background:#fff; border-radius:20px; max-width:480px; width:100%; padding:36px 28px; box-shadow:0 24px 64px rgba(0,0,0,0.2); position:relative; animation:gs-in 0.3s cubic-bezier(0.34,1.56,0.64,1);">
-    <button onclick="closeGsModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;color:#aaa;font-size:22px;line-height:1;">✕</button>
-    <h2 style="font-family:'Petrona',serif;font-style:italic;font-size:26px;color:#0057B8;margin-bottom:6px;font-weight:500;">how can we help?</h2>
-    <p style="font-size:14px;color:#888;margin-bottom:28px;font-family:'Karla',sans-serif;">choose the best next step for you</p>
-    <div style="display:flex;flex-direction:column;gap:14px;">
-
-      <a href="checkout.html" style="text-decoration:none;">
-        <div class="gs-option">
-          <div class="gs-option-icon" style="background:linear-gradient(135deg,#5DBED8,#0057B8);">✓</div>
-          <div>
-            <div class="gs-option-title">I'm ready to buy</div>
-            <div class="gs-option-sub">Start using Integrate today and begin saving time immediately.</div>
-          </div>
-        </div>
-      </a>
-
-      <a href="schedule.html" style="text-decoration:none;">
-        <div class="gs-option">
-          <div class="gs-option-icon" style="background:linear-gradient(135deg,#60C6A8,#0057B8);">💬</div>
-          <div>
-            <div class="gs-option-title">I want to speak to sales</div>
-            <div class="gs-option-sub">Have questions? Let's walk through your workflow and see if it's a fit.</div>
-          </div>
-        </div>
-      </a>
-
-      <a href="get-started.html" style="text-decoration:none;">
-        <div class="gs-option">
-          <div class="gs-option-icon" style="background:linear-gradient(135deg,#A78BFA,#0057B8);">✉</div>
-          <div>
-            <div class="gs-option-title">Email me a demo</div>
-            <div class="gs-option-sub">Get a quick overview of how Integrate works, sent straight to your inbox.</div>
-          </div>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</div>
-
-<style>
-  @keyframes gs-in {
-    from { opacity:0; transform:scale(0.92) translateY(12px); }
-    to   { opacity:1; transform:scale(1) translateY(0); }
-  }
-  .gs-option {
-    display:flex; align-items:flex-start; gap:16px;
-    padding:16px 18px; border-radius:14px; border:1.5px solid #e5e7eb;
-    cursor:pointer; transition:border-color .2s, box-shadow .2s, transform .15s;
-    font-family:'Karla',sans-serif;
-  }
-  .gs-option:hover {
-    border-color:#5DBED8;
-    box-shadow:0 4px 16px rgba(93,190,216,0.2);
-    transform:translateY(-2px);
-  }
-  .gs-option-icon {
-    width:40px; height:40px; border-radius:10px; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center;
-    color:#fff; font-size:16px;
-  }
-  .gs-option-title { font-size:15px; font-weight:600; color:#1a1a1a; margin-bottom:3px; }
-  .gs-option-sub { font-size:13px; color:#666; line-height:1.5; }
-  #gs-modal-overlay.open { display:flex !important; }
-</style>
-
-<script>
-  function openGsModal() {
-    const overlay = document.getElementById('gs-modal-overlay');
-    overlay.style.display = 'flex';
-    requestAnimationFrame(() => overlay.classList.add('open'));
-  }
-  function closeGsModal() {
-    document.getElementById('gs-modal-overlay').style.display = 'none';
-  }
-  document.getElementById('gs-modal-overlay').addEventListener('click', function(e) {
-    if (e.target === this) closeGsModal();
-  });
-
-  // Intercept all get-started.html links (except ones inside the modal)
-  document.querySelectorAll('a[href="get-started.html"]').forEach(a => {
-    if (a.closest('#gs-modal-overlay')) return;
-    a.addEventListener('click', function(e) {
-      e.preventDefault();
-      openGsModal();
-    });
-  });
-</script>
+<script src="assets/site.js" defer></script>
 </body>
 </html>
